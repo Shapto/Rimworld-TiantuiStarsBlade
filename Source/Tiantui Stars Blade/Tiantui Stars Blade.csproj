@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="CompTiantuiBlade.cs" />
     <Compile Include="Gizmo_TiantuiBladeStatus.cs" />
+    <Compile Include="HediffComp_TiantuiBladeLink.cs" />
     <Compile Include="TiantuiDefOf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

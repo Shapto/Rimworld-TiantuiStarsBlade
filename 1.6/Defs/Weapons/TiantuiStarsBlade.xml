@@ -61,7 +61,10 @@
 				</unworthyStatFactors>
 				<showAptitudeGizmo>false</showAptitudeGizmo>
 			</li>
-			<li Class="Tiantui_Stars_Blade.CompProperties_TiantuiBlade"/>
+			<li Class="Tiantui_Stars_Blade.CompProperties_TiantuiBlade">
+				<overheatHediff>Tiantui_Overheated</overheatHediff>
+				<innerStrengthHediff>Tiantui_InnerStrength</innerStrengthHediff>
+			</li>
 		</comps>
 	</ThingDef>
 </Defs>

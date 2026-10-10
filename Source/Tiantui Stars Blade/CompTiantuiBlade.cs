@@ -37,6 +37,8 @@ namespace Tiantui_Stars_Blade
 
         public HediffDef overheatHediff;
 
+        public HediffDef innerStrengthHediff;
+
         public CompProperties_TiantuiBlade()
         {
             compClass = typeof(CompTiantuiBlade);
@@ -92,10 +94,6 @@ namespace Tiantui_Stars_Blade
             savageTigerslayerRoundsLoaded = Props.savageTigerslayerMagazineCapacity;
         }
 
-        /// <summary>
-        /// Fires one round of the selected type if one is loaded and the blade isn't overheated, and adds its heat.
-        /// Returns false if nothing was fired, so the caller does an unempowered hit instead.
-        /// </summary>
         public bool TrySpendRound(bool isJumpSlam)
         {
             if (IsOverheated || RoundsLoadedInSelectedMagazine <= 0) return false;
@@ -110,17 +108,12 @@ namespace Tiantui_Stars_Blade
             return true;
         }
 
-        /// <summary>
-        /// Switches between the two round types. Loaded rounds of both types are kept.
-        /// </summary>
         public void SwitchRoundType()
         {
             selectedRoundType = IsSavageModeActive ? TigerslayerRoundType.Tigerslayer : TigerslayerRoundType.SavageTigerslayer;
+            UpdateInnerStrengthStage();
         }
 
-        /// <summary>
-        /// Adds heat, scaled by the blade's heat buildup stat and overheats the blade when it reaches the maximum.
-        /// </summary>
         private void AddHeat(float baseHeat)
         {
             storedHeat = CurrentHeat + baseHeat * parent.GetStatValue(TiantuiDefOf.Tiantui_HeatBuildup);
@@ -134,6 +127,30 @@ namespace Tiantui_Stars_Blade
             Pawn wielder = Wielder;
             if (wielder == null || Props.overheatHediff == null) return;
             if (!wielder.health.hediffSet.HasHediff(Props.overheatHediff)) wielder.health.AddHediff(Props.overheatHediff);
+        }
+
+        public override void Notify_Equipped(Pawn pawn)
+        {
+            base.Notify_Equipped(pawn);
+            if (Props.innerStrengthHediff == null) return;
+            if (!pawn.health.hediffSet.HasHediff(Props.innerStrengthHediff)) pawn.health.AddHediff(Props.innerStrengthHediff);
+            UpdateInnerStrengthStage();
+        }
+
+        public override void Notify_Unequipped(Pawn pawn)
+        {
+            base.Notify_Unequipped(pawn);
+            if (Props.innerStrengthHediff == null) return;
+            Hediff innerStrength = pawn.health.hediffSet.GetFirstHediffOfDef(Props.innerStrengthHediff);
+            if (innerStrength != null) pawn.health.RemoveHediff(innerStrength);
+        }
+
+        private void UpdateInnerStrengthStage()
+        {
+            Pawn wielder = Wielder;
+            if (wielder == null || Props.innerStrengthHediff == null) return;
+            Hediff innerStrength = wielder.health.hediffSet.GetFirstHediffOfDef(Props.innerStrengthHediff);
+            if (innerStrength != null) innerStrength.Severity = IsSavageModeActive ? 2f : 1f;
         }
 
         public IEnumerable<Gizmo> GetEquippedGizmos(Pawn wielder)

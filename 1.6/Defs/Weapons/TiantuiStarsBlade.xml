@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseWeapon">
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp">
 		<defName>TiantuiStarsBlade</defName>
 		<label>Tiantui Star's Blade</label>
 		<description>TODO</description>
@@ -11,8 +11,11 @@
 		</graphicData>
 		<equippedAngleOffset>-45</equippedAngleOffset>
 		<techLevel>Ultra</techLevel>
-		<tradeability>Sellable</tradeability>
+		<useHitPoints>false</useHitPoints>
 		<smeltable>false</smeltable>
+		<burnableByRecipe>false</burnableByRecipe>
+		<recipeMaker IsNull="True"/>
+		<tradeability>Sellable</tradeability>
 		<relicChance>1</relicChance>
 		<thingSetMakerTags>
 			<li>RewardStandardLowFreq</li>
@@ -24,7 +27,7 @@
 			<DeteriorationRate>0</DeteriorationRate>
 			<MarketValue>3000</MarketValue>
 		</statBases>
-		<weaponClasses>
+		<weaponClasses Inherit="False">
 			<li>Melee</li>
 			<li>Ultratech</li>
 		</weaponClasses>
@@ -39,5 +42,15 @@
 				<armorPenetration>0.9</armorPenetration>
 			</li>
 		</tools>
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable"/>
+			<li>
+				<compClass>CompEquippable</compClass>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="SingularityFramework.Relics.CompProperties_RelicAptitude">
+				<rejectsUnworthy>false</rejectsUnworthy>
+			</li>
+		</comps>
 	</ThingDef>
 </Defs>

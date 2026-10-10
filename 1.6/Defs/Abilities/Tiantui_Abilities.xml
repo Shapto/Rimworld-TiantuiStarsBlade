@@ -31,6 +31,7 @@
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>25</damageAmount>
 					<armorPenetration>0.9</armorPenetration>
+					<hitsDownedPawns>true</hitsDownedPawns>
 				</strikeSettings>
 			</li>
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityJumpSlam">
@@ -84,6 +85,7 @@
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>35</damageAmount>
 					<armorPenetration>0.9</armorPenetration>
+					<hitsDownedPawns>true</hitsDownedPawns>
 				</strikeSettings>
 			</li>
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityJumpSlam">

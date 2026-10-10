@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<JobDef>
+		<defName>Tiantui_ReloadBlade</defName>
+		<driverClass>Tiantui_Stars_Blade.JobDriver_ReloadTiantuiBlade</driverClass>
+		<reportString>reloading the Tiantui Star's Blade.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+</Defs>

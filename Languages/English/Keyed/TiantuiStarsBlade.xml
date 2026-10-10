@@ -8,4 +8,8 @@
 	<Tiantui_HeatLabel>Heat {0}</Tiantui_HeatLabel>
 	<Tiantui_Overheated>OVERHEATED</Tiantui_Overheated>
 	<Tiantui_HeatTooltip>Heat: {0} / {1}. Firing rounds builds heat; it cools over time. At the maximum the blade overheats until it cools below {2}.</Tiantui_HeatTooltip>
+	<Tiantui_Reload>Reload</Tiantui_Reload>
+	<Tiantui_ReloadDescription>Go to the nearest {0} and load rounds into the selected magazine. Each round costs {1} {0}.</Tiantui_ReloadDescription>
+	<Tiantui_MagazineFull>The selected magazine is already full.</Tiantui_MagazineFull>
+	<Tiantui_NoAmmoNearby>No reachable {0} to reload with.</Tiantui_NoAmmoNearby>
 </LanguageData>

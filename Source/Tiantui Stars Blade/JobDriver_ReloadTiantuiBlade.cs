@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Verse;
+using Verse.AI;
+
+namespace Tiantui_Stars_Blade
+{
+    public class JobDriver_ReloadTiantuiBlade : JobDriver
+    {
+        private const TargetIndex AmmoStackIndex = TargetIndex.A;
+
+        private Thing AmmoStack => job.GetTarget(AmmoStackIndex).Thing;
+
+        private CompTiantuiBlade BladeComp => pawn.equipment?.Primary?.TryGetComp<CompTiantuiBlade>();
+
+        /// <summary>
+        /// True when the ammo is in the pawn's own inventory instead of lying on the map.
+        /// </summary>
+        private bool AmmoIsCarried => AmmoStack?.ParentHolder is Pawn_InventoryTracker;
+
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+            if (AmmoIsCarried) return true;
+            return pawn.Reserve(AmmoStack, job, 1, -1, null, errorOnFailed);
+        }
+
+        protected override IEnumerable<Toil> MakeNewToils()
+        {
+            this.FailOn(() => BladeComp == null);
+            int reloadTicks = BladeComp?.Props.reloadTicks ?? 120;
+
+            if (AmmoIsCarried)
+            {
+                this.FailOn(() => AmmoStack == null || AmmoStack.Destroyed);
+                yield return Toils_General.Wait(reloadTicks);
+            }
+            else
+            {
+                this.FailOnDespawnedNullOrForbidden(AmmoStackIndex);
+                yield return Toils_Goto.GotoThing(AmmoStackIndex, PathEndMode.Touch);
+                yield return Toils_General.Wait(reloadTicks, AmmoStackIndex).WithProgressBarToilDelay(AmmoStackIndex);
+            }
+
+            Toil loadRounds = ToilMaker.MakeToil("LoadRounds");
+            loadRounds.initAction = LoadRounds;
+            loadRounds.defaultCompleteMode = ToilCompleteMode.Instant;
+            yield return loadRounds;
+        }
+
+        private void LoadRounds()
+        {
+            CompTiantuiBlade bladeComp = BladeComp;
+            Thing ammoStack = AmmoStack;
+            if (bladeComp == null || ammoStack == null) return;
+
+            if (!AmmoIsCarried)
+            {
+                bladeComp.ReloadFrom(ammoStack);
+                return;
+            }
+
+            ThingDef ammoDef = ammoStack.def;
+            foreach (Thing carriedStack in pawn.inventory.innerContainer.Where(carriedThing => carriedThing.def == ammoDef).ToList())
+            {
+                bladeComp.ReloadFrom(carriedStack);
+            }
+        }
+    }
+}

@@ -64,6 +64,8 @@
 			<li Class="Tiantui_Stars_Blade.CompProperties_TiantuiBlade">
 				<overheatHediff>Tiantui_Overheated</overheatHediff>
 				<innerStrengthHediff>Tiantui_InnerStrength</innerStrengthHediff>
+				<tigerslayerAmmoDef>Steel</tigerslayerAmmoDef>
+				<savageTigerslayerAmmoDef>Uranium</savageTigerslayerAmmoDef>
 			</li>
 			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
 				<tigerslayerOnHitEffects>

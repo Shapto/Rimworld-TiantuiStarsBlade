@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace Tiantui_Stars_Blade
 {
@@ -39,6 +40,13 @@ namespace Tiantui_Stars_Blade
 
         public HediffDef innerStrengthHediff;
 
+        public ThingDef tigerslayerAmmoDef;
+        public ThingDef savageTigerslayerAmmoDef;
+        public int ammoPerTigerslayerRound = 5;
+        public int ammoPerSavageTigerslayerRound = 2;
+
+        public int reloadTicks = 120;
+
         public CompProperties_TiantuiBlade()
         {
             compClass = typeof(CompTiantuiBlade);
@@ -65,6 +73,12 @@ namespace Tiantui_Stars_Blade
         public int RoundsLoadedInSelectedMagazine => IsSavageModeActive ? savageTigerslayerRoundsLoaded : tigerslayerRoundsLoaded;
 
         public int SelectedMagazineCapacity => IsSavageModeActive ? Props.savageTigerslayerMagazineCapacity : Props.tigerslayerMagazineCapacity;
+
+        public ThingDef SelectedAmmoDef => IsSavageModeActive ? Props.savageTigerslayerAmmoDef : Props.tigerslayerAmmoDef;
+
+        public int AmmoPerSelectedRound => IsSavageModeActive ? Props.ammoPerSavageTigerslayerRound : Props.ammoPerTigerslayerRound;
+
+        public int RoundsMissingFromSelectedMagazine => SelectedMagazineCapacity - RoundsLoadedInSelectedMagazine;
 
         public float CurrentHeat
         {
@@ -112,6 +126,48 @@ namespace Tiantui_Stars_Blade
         {
             selectedRoundType = IsSavageModeActive ? TigerslayerRoundType.Tigerslayer : TigerslayerRoundType.SavageTigerslayer;
             UpdateInnerStrengthStage();
+        }
+
+        public void ReloadFrom(Thing ammoStack)
+        {
+            if (ammoStack == null || ammoStack.Destroyed) return;
+
+            bool isSavageAmmo = ammoStack.def == Props.savageTigerslayerAmmoDef;
+            if (!isSavageAmmo && ammoStack.def != Props.tigerslayerAmmoDef) return;
+
+            int ammoPerRound = isSavageAmmo ? Props.ammoPerSavageTigerslayerRound : Props.ammoPerTigerslayerRound;
+            int roundsMissing = isSavageAmmo ? Props.savageTigerslayerMagazineCapacity - savageTigerslayerRoundsLoaded : Props.tigerslayerMagazineCapacity - tigerslayerRoundsLoaded;
+            int roundsLoaded = Mathf.Min(roundsMissing, ammoStack.stackCount / Mathf.Max(1, ammoPerRound));
+            if (roundsLoaded <= 0) return;
+
+            ammoStack.SplitOff(roundsLoaded * ammoPerRound).Destroy();
+
+            if (isSavageAmmo) savageTigerslayerRoundsLoaded += roundsLoaded;
+            else tigerslayerRoundsLoaded += roundsLoaded;
+        }
+
+        private void TryStartReload(Pawn wielder)
+        {
+            ThingDef ammoDef = SelectedAmmoDef;
+            if (wielder?.Map == null || ammoDef == null) return;
+
+            int ammoPerRound = AmmoPerSelectedRound;
+
+            Thing ammoStack = wielder.inventory?.innerContainer.FirstOrDefault(carriedThing => carriedThing.def == ammoDef && carriedThing.stackCount >= ammoPerRound);
+
+            if (ammoStack == null)
+            {
+                ammoStack = GenClosest.ClosestThingReachable(wielder.Position, wielder.Map, ThingRequest.ForDef(ammoDef), PathEndMode.Touch, TraverseParms.For(wielder), 9999f, candidate => candidate.stackCount >= ammoPerRound && !candidate.IsForbidden(wielder) && wielder.CanReserve(candidate));
+            }
+
+            if (ammoStack == null)
+            {
+                Messages.Message("Tiantui_NoAmmoNearby".Translate(ammoDef.label), wielder, MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            Job reloadJob = JobMaker.MakeJob(TiantuiDefOf.Tiantui_ReloadBlade, ammoStack);
+            wielder.jobs.TryTakeOrderedJob(reloadJob, JobTag.Misc);
         }
 
         private void AddHeat(float baseHeat)
@@ -162,6 +218,14 @@ namespace Tiantui_Stars_Blade
                 defaultDesc = "Tiantui_SwitchRoundTypeDescription".Translate(),
                 action = SwitchRoundType
             };
+            Command_Action reloadCommand = new Command_Action
+            {
+                defaultLabel = "Tiantui_Reload".Translate(),
+                defaultDesc = "Tiantui_ReloadDescription".Translate(SelectedAmmoDef?.label ?? "?", AmmoPerSelectedRound),
+                action = () => TryStartReload(wielder)
+            };
+            if (RoundsMissingFromSelectedMagazine <= 0) reloadCommand.Disable("Tiantui_MagazineFull".Translate());
+            yield return reloadCommand;
         }
 
         public override void PostExposeData()

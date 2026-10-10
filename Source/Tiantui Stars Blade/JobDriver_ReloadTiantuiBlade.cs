@@ -60,15 +60,12 @@ namespace Tiantui_Stars_Blade
 
             if (!AmmoIsCarried)
             {
-                bladeComp.ReloadFrom(ammoStack);
+                bladeComp.ReloadFrom(new List<Thing> { ammoStack });
                 return;
             }
 
             ThingDef ammoDef = ammoStack.def;
-            foreach (Thing carriedStack in pawn.inventory.innerContainer.Where(carriedThing => carriedThing.def == ammoDef).ToList())
-            {
-                bladeComp.ReloadFrom(carriedStack);
-            }
+            bladeComp.ReloadFrom(pawn.inventory.innerContainer.Where(carriedThing => carriedThing.def == ammoDef).ToList());
         }
     }
 }

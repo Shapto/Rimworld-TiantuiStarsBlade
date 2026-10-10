@@ -20,6 +20,7 @@
 		<thingSetMakerTags>
 			<li>RewardStandardLowFreq</li>
 		</thingSetMakerTags>
+		<meleeHitSound>Tiantui_Swing</meleeHitSound>
 		<statBases>
 			<Mass>3.5</Mass>
 			<Beauty>5</Beauty>
@@ -42,7 +43,6 @@
 				<cooldownTime>2</cooldownTime>
 				<armorPenetration>0.9</armorPenetration>
 				<soundMeleeHit>Tiantui_Swing</soundMeleeHit>
-				<soundMeleeMiss>Tiantui_Swing</soundMeleeMiss>
 			</li>
 		</tools>
 		<comps Inherit="False">

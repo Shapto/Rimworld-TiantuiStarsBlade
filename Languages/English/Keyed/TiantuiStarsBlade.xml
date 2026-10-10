@@ -2,7 +2,6 @@
 <LanguageData>
 	<Tiantui_LoadTigerslayerRounds>Load Tigerslayer Rounds</Tiantui_LoadTigerslayerRounds>
 	<Tiantui_LoadSavageTigerslayerRounds>Load Savage Tigerslayer Rounds</Tiantui_LoadSavageTigerslayerRounds>
-	<Tiantui_SwitchRoundTypeDescription>Switch which round type the blade fires. Rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeDescription>
 	<Tiantui_TigerslayerRoundsName>Tigerslayer Rounds</Tiantui_TigerslayerRoundsName>
 	<Tiantui_SavageTigerslayerRoundsName>Savage Tigerslayer Rounds</Tiantui_SavageTigerslayerRoundsName>
 	<Tiantui_HeatLabel>Heat {0}</Tiantui_HeatLabel>
@@ -12,4 +11,5 @@
 	<Tiantui_ReloadDescription>Go to the nearest {0} and load rounds into the selected magazine. Each round costs {1} {0}.</Tiantui_ReloadDescription>
 	<Tiantui_MagazineFull>The selected magazine is already full.</Tiantui_MagazineFull>
 	<Tiantui_NoAmmoNearby>No reachable {0} to reload with.</Tiantui_NoAmmoNearby>
+	<Tiantui_Reload>Reload</Tiantui_Reload>
 </LanguageData>

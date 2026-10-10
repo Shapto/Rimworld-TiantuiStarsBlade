@@ -21,6 +21,8 @@ namespace Tiantui_Stars_Blade
         private static readonly Texture2D HeatBarTexture = SolidColorMaterials.NewSolidColorTexture(new Color(0.95f, 0.55f, 0.15f));
         private static readonly Texture2D OverheatedBarTexture = SolidColorMaterials.NewSolidColorTexture(new Color(0.85f, 0.1f, 0.1f));
 
+        private static float cachedContentWidth = -1f;
+
         public CompTiantuiBlade bladeComp;
         public Pawn wielder;
 
@@ -31,14 +33,16 @@ namespace Tiantui_Stars_Blade
 
         public override float GetWidth(float maximumWidth)
         {
-            GameFont previousFont = Text.Font;
-            Text.Font = GameFont.Tiny;
-            float roundTypeWidth = Mathf.Max(Text.CalcSize("Tiantui_TigerslayerRoundsName".Translate()).x, Text.CalcSize("Tiantui_SavageTigerslayerRoundsName".Translate()).x);
-            float aptitudeWidth = Text.CalcSize(RelicAptitude.Label(AptitudeLevel.Partial).CapitalizeFirst()).x;
-            Text.Font = previousFont;
-
-            float neededWidth = roundTypeWidth + aptitudeWidth + 12f + 10f;
-            return Mathf.Clamp(neededWidth, 180f, maximumWidth);
+            if (cachedContentWidth < 0f)
+            {
+                GameFont previousFont = Text.Font;
+                Text.Font = GameFont.Tiny;
+                float roundTypeWidth = Mathf.Max(Text.CalcSize("Tiantui_TigerslayerRoundsName".Translate()).x, Text.CalcSize("Tiantui_SavageTigerslayerRoundsName".Translate()).x);
+                float aptitudeWidth = Text.CalcSize(RelicAptitude.Label(AptitudeLevel.Partial).CapitalizeFirst()).x;
+                Text.Font = previousFont;
+                cachedContentWidth = roundTypeWidth + aptitudeWidth + 12f + 10f;
+            }
+            return Mathf.Clamp(cachedContentWidth, 180f, maximumWidth);
         }
 
         public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maximumWidth, GizmoRenderParms renderParameters)

@@ -13,6 +13,7 @@ namespace Tiantui_Stars_Blade
     {
         public static StatDef Tiantui_HeatBuildup;
         public static JobDef Tiantui_ReloadBlade;
+        public static JobDef Tiantui_SwitchRounds;
         static TiantuiDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(TiantuiDefOf));

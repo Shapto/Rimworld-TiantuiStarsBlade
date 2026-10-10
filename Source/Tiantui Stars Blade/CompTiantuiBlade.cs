@@ -103,9 +103,19 @@ namespace Tiantui_Stars_Blade
                 if (isOverheated && CurrentHeat < Props.overheatClearsBelowHeat)
                 {
                     isOverheated = false;
-                    PlayAtWielder(Props.coolOffSound);
+                    if (Find.TickManager.TicksGame - TickHeatClearsOverheat <= 120) PlayAtWielder(Props.coolOffSound);
                 }
                 return isOverheated;
+            }
+        }
+
+        private int TickHeatClearsOverheat
+        {
+            get
+            {
+                if (Props.heatCooledPerSecond <= 0f) return int.MaxValue;
+                float secondsToClear = (storedHeat - Props.overheatClearsBelowHeat) / Props.heatCooledPerSecond;
+                return heatLastChangedTick + Mathf.CeilToInt(secondsToClear * 60f);
             }
         }
 
@@ -147,19 +157,29 @@ namespace Tiantui_Stars_Blade
             sound.PlayOneShot(new TargetInfo(wielder.Position, wielder.Map));
         }
 
-        public void ReloadFrom(Thing ammoStack)
+        public void ReloadFrom(List<Thing> ammoStacks)
         {
-            if (ammoStack == null || ammoStack.Destroyed) return;
+            ammoStacks = ammoStacks?.Where(stack => stack != null && !stack.Destroyed).ToList();
+            if (ammoStacks.NullOrEmpty()) return;
 
-            bool isSavageAmmo = ammoStack.def == Props.savageTigerslayerAmmoDef;
-            if (!isSavageAmmo && ammoStack.def != Props.tigerslayerAmmoDef) return;
+            ThingDef ammoDef = ammoStacks[0].def;
+            bool isSavageAmmo = ammoDef == Props.savageTigerslayerAmmoDef;
+            if (!isSavageAmmo && ammoDef != Props.tigerslayerAmmoDef) return;
 
-            int ammoPerRound = isSavageAmmo ? Props.ammoPerSavageTigerslayerRound : Props.ammoPerTigerslayerRound;
+            int ammoPerRound = Mathf.Max(1, isSavageAmmo ? Props.ammoPerSavageTigerslayerRound : Props.ammoPerTigerslayerRound);
             int roundsMissing = isSavageAmmo ? Props.savageTigerslayerMagazineCapacity - savageTigerslayerRoundsLoaded : Props.tigerslayerMagazineCapacity - tigerslayerRoundsLoaded;
-            int roundsLoaded = Mathf.Min(roundsMissing, ammoStack.stackCount / Mathf.Max(1, ammoPerRound));
+            int ammoAvailable = ammoStacks.Where(stack => stack.def == ammoDef).Sum(stack => stack.stackCount);
+            int roundsLoaded = Mathf.Min(roundsMissing, ammoAvailable / ammoPerRound);
             if (roundsLoaded <= 0) return;
 
-            ammoStack.SplitOff(roundsLoaded * ammoPerRound).Destroy();
+            int ammoStillToTake = roundsLoaded * ammoPerRound;
+            foreach (Thing ammoStack in ammoStacks.Where(stack => stack.def == ammoDef))
+            {
+                if (ammoStillToTake <= 0) break;
+                int takenFromThisStack = Mathf.Min(ammoStillToTake, ammoStack.stackCount);
+                ammoStack.SplitOff(takenFromThisStack).Destroy();
+                ammoStillToTake -= takenFromThisStack;
+            }
 
             if (isSavageAmmo) savageTigerslayerRoundsLoaded += roundsLoaded;
             else tigerslayerRoundsLoaded += roundsLoaded;
@@ -172,7 +192,8 @@ namespace Tiantui_Stars_Blade
 
             int ammoPerRound = AmmoPerSelectedRound;
 
-            Thing ammoStack = wielder.inventory?.innerContainer.FirstOrDefault(carriedThing => carriedThing.def == ammoDef && carriedThing.stackCount >= ammoPerRound);
+            List<Thing> carriedAmmo = wielder.inventory?.innerContainer.Where(carriedThing => carriedThing.def == ammoDef).ToList();
+            Thing ammoStack = carriedAmmo != null && carriedAmmo.Sum(carriedThing => carriedThing.stackCount) >= ammoPerRound ? carriedAmmo[0] : null;
 
             if (ammoStack == null)
             {
@@ -216,6 +237,8 @@ namespace Tiantui_Stars_Blade
         public override void Notify_Unequipped(Pawn pawn)
         {
             base.Notify_Unequipped(pawn);
+            if (pawn.Spawned && Props.equipSound != null) Props.equipSound.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map));
+            if (IsOverheated && Props.overheatHediff != null && !pawn.health.hediffSet.HasHediff(Props.overheatHediff)) pawn.health.AddHediff(Props.overheatHediff);
             if (Props.innerStrengthHediff == null) return;
             Hediff innerStrength = pawn.health.hediffSet.GetFirstHediffOfDef(Props.innerStrengthHediff);
             if (innerStrength != null) pawn.health.RemoveHediff(innerStrength);
@@ -236,7 +259,7 @@ namespace Tiantui_Stars_Blade
             {
                 defaultLabel = IsSavageModeActive ? "Tiantui_LoadTigerslayerRounds".Translate() : "Tiantui_LoadSavageTigerslayerRounds".Translate(),
                 defaultDesc = "Tiantui_SwitchRoundTypeDescription".Translate(),
-                action = SwitchRoundType
+                action = () => wielder.jobs.TryTakeOrderedJob(JobMaker.MakeJob(TiantuiDefOf.Tiantui_SwitchRounds), JobTag.Misc)
             };
             Command_Action reloadCommand = new Command_Action
             {

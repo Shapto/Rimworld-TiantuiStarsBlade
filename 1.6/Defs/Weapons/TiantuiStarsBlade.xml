@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseWeapon">
+		<defName>TiantuiStarsBlade</defName>
+		<label>Tiantui Star's Blade</label>
+		<description>TODO</description>
+		<graphicData>
+			<texPath>Weapons/TiantuiStarsBlade</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.6, 1.6)</drawSize>
+		</graphicData>
+		<equippedAngleOffset>-45</equippedAngleOffset>
+		<techLevel>Ultra</techLevel>
+		<tradeability>Sellable</tradeability>
+		<smeltable>false</smeltable>
+		<relicChance>1</relicChance>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<statBases>
+			<Mass>3.5</Mass>
+			<Beauty>5</Beauty>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+			<MarketValue>3000</MarketValue>
+		</statBases>
+		<weaponClasses>
+			<li>Melee</li>
+			<li>Ultratech</li>
+		</weaponClasses>
+		<tools>
+			<li>
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>27</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetration>0.9</armorPenetration>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

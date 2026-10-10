@@ -138,6 +138,7 @@ namespace Tiantui_Stars_Blade
 
         public IEnumerable<Gizmo> GetEquippedGizmos(Pawn wielder)
         {
+            yield return new Gizmo_TiantuiBladeStatus { bladeComp = this, wielder = wielder };
             yield return new Command_Action
             {
                 defaultLabel = IsSavageModeActive ? "Tiantui_LoadTigerslayerRounds".Translate() : "Tiantui_LoadSavageTigerslayerRounds".Translate(),

@@ -3,4 +3,9 @@
 	<Tiantui_LoadTigerslayerRounds>Load Tigerslayer Rounds</Tiantui_LoadTigerslayerRounds>
 	<Tiantui_LoadSavageTigerslayerRounds>Load Savage Tigerslayer Rounds</Tiantui_LoadSavageTigerslayerRounds>
 	<Tiantui_SwitchRoundTypeDescription>Switch which round type the blade fires. Rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeDescription>
+	<Tiantui_TigerslayerRoundsName>Tigerslayer Rounds</Tiantui_TigerslayerRoundsName>
+	<Tiantui_SavageTigerslayerRoundsName>Savage Tigerslayer Rounds</Tiantui_SavageTigerslayerRoundsName>
+	<Tiantui_HeatLabel>Heat {0}</Tiantui_HeatLabel>
+	<Tiantui_Overheated>OVERHEATED</Tiantui_Overheated>
+	<Tiantui_HeatTooltip>Heat: {0} / {1}. Firing rounds builds heat; it cools over time. At the maximum the blade overheats until it cools below {2}.</Tiantui_HeatTooltip>
 </LanguageData>

@@ -59,8 +59,9 @@
 					<Tiantui_HeatBuildup>4</Tiantui_HeatBuildup>
 					<MeleeWeapon_DamageMultiplier>0.6</MeleeWeapon_DamageMultiplier>
 				</unworthyStatFactors>
+				<showAptitudeGizmo>false</showAptitudeGizmo>
 			</li>
-			<li Class="TiantuiStarsBlade.CompProperties_TiantuiBlade"/>
+			<li Class="Tiantui_Stars_Blade.CompProperties_TiantuiBlade"/>
 		</comps>
 	</ThingDef>
 </Defs>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="PawnFlyerBase">
+		<defName>Tiantui_TigerslayerFlyer</defName>
+		<thingClass>SingularityFramework.Sequences.PawnFlyer_LandingSlam</thingClass>
+		<pawnFlyer>
+			<flightDurationMin>0.5</flightDurationMin>
+			<flightSpeed>12</flightSpeed>
+			<heightFactor>0.035</heightFactor>
+		</pawnFlyer>
+		<modExtensions>
+			<li Class="SingularityFramework.Sequences.ModExtension_LandingSlam">
+				<damageDefinition>Bomb</damageDefinition>
+				<damageAmount>35</damageAmount>
+				<radius>2.9</radius>
+				<explosionSound>Tiantui_NormalLanding</explosionSound>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="PawnFlyerBase">
+		<defName>Tiantui_SavageFlyer</defName>
+		<thingClass>SingularityFramework.Sequences.PawnFlyer_LandingSlam</thingClass>
+		<pawnFlyer>
+			<flightDurationMin>0.5</flightDurationMin>
+			<flightSpeed>12</flightSpeed>
+			<heightFactor>0.035</heightFactor>
+		</pawnFlyer>
+		<modExtensions>
+			<li Class="SingularityFramework.Sequences.ModExtension_LandingSlam">
+				<damageDefinition>Bomb</damageDefinition>
+				<damageAmount>55</damageAmount>
+				<radius>3.9</radius>
+				<explosionSound>Tiantui_SavageLanding</explosionSound>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

@@ -31,7 +31,6 @@ namespace Tiantui_Stars_Blade
 
         public float heatPerTigerslayerRound = 10f;
         public float heatPerSavageTigerslayerRound = 15f;
-        public float jumpSlamHeatMultiplier = 2.5f;
 
         public float maximumHeat = 100f;
         public float overheatClearsBelowHeat = 40f;
@@ -129,18 +128,20 @@ namespace Tiantui_Stars_Blade
             savageTigerslayerRoundsLoaded = Props.savageTigerslayerMagazineCapacity;
         }
 
-        public bool TrySpendRound(bool isJumpSlam)
+        /// <summary>
+        /// Fires one round of the selected type if one is loaded and the blade isn't overheated.
+        /// Normal attacks add heat; ability stages don't (the finisher overheats the blade instead).
+        /// The fired sound can be swapped, e.g. the Savage abilities' launch sound in place of the gunshot.
+        /// </summary>
+        public bool TrySpendRound(bool addsHeat = true, SoundDef firedSound = null)
         {
             if (IsOverheated || RoundsLoadedInSelectedMagazine <= 0) return false;
 
             if (IsSavageModeActive) savageTigerslayerRoundsLoaded--;
             else tigerslayerRoundsLoaded--;
 
-            float baseHeat = IsSavageModeActive ? Props.heatPerSavageTigerslayerRound : Props.heatPerTigerslayerRound;
-            if (isJumpSlam) baseHeat *= Props.jumpSlamHeatMultiplier;
-
-            AddHeat(baseHeat);
-            PlayAtWielder(Props.roundFiredSound);
+            if (addsHeat) AddHeat(IsSavageModeActive ? Props.heatPerSavageTigerslayerRound : Props.heatPerTigerslayerRound);
+            PlayAtWielder(firedSound ?? Props.roundFiredSound);
             return true;
         }
 
@@ -214,10 +215,15 @@ namespace Tiantui_Stars_Blade
         {
             storedHeat = CurrentHeat + baseHeat * parent.GetStatValue(TiantuiDefOf.Tiantui_HeatBuildup);
             heatLastChangedTick = Find.TickManager.TicksGame;
+            if (storedHeat >= Props.maximumHeat) ForceOverheat();
+        }
 
-            if (storedHeat < Props.maximumHeat) return;
-
+        public void ForceOverheat()
+        {
             storedHeat = Props.maximumHeat;
+            heatLastChangedTick = Find.TickManager.TicksGame;
+            if (isOverheated) return;
+
             isOverheated = true;
             PlayAtWielder(Props.overheatSound);
 

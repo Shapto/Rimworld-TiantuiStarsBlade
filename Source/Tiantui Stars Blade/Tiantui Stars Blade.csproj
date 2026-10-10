@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompAbilityEffect_Tigerslayer.cs" />
     <Compile Include="CompShatterslash.cs" />
     <Compile Include="CompTiantuiBlade.cs" />
     <Compile Include="Gizmo_TiantuiBladeStatus.cs" />

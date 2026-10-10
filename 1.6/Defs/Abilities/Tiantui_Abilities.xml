@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<AbilityDef>
+		<defName>Tiantui_Tigerslayer</defName>
+		<label>Tigerslayer</label>
+		<description>TODO</description>
+		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
+		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+		<aiCanUse>false</aiCanUse>
+		<verbProperties>
+			<verbClass>SingularityFramework.Sequences.Verb_CastAbilityLineDash</verbClass>
+			<range>8</range>
+			<warmupTime>0</warmupTime>
+			<requireLineOfSight>true</requireLineOfSight>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetPawns>true</canTargetPawns>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="Tiantui_Stars_Blade.CompProperties_AbilityTigerslayer">
+				<roundType>Tigerslayer</roundType>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityLineDash">
+				<dashJob>Sing_LineDash</dashJob>
+				<cellsPerTick>0.5</cellsPerTick>
+				<strikeSettings>
+					<damageDefinition>Cut</damageDefinition>
+					<damageAmount>25</damageAmount>
+					<armorPenetration>0.9</armorPenetration>
+				</strikeSettings>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityJumpSlam">
+				<flyerDefinition>Tiantui_TigerslayerFlyer</flyerDefinition>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityChain">
+				<stageCount>3</stageCount>
+				<cooldownAfterFinalStageTicks>0</cooldownAfterFinalStageTicks>
+				<chargeUpJob>Sing_ChargeUp</chargeUpJob>
+				<stageSettings>
+					<li />
+					<li />
+					<li>
+						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpSound>Tiantui_Charge</chargeUpSound>
+					</li>
+				</stageSettings>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<AbilityDef>
+		<defName>Tiantui_PerfectedFlurry</defName>
+		<label>Savage Tigerslayer's Perfected Flurry of Blades</label>
+		<description>TODO</description>
+		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
+		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+		<aiCanUse>false</aiCanUse>
+		<verbProperties>
+			<verbClass>SingularityFramework.Sequences.Verb_CastAbilityLineDash</verbClass>
+			<range>10</range>
+			<warmupTime>0</warmupTime>
+			<requireLineOfSight>true</requireLineOfSight>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetPawns>true</canTargetPawns>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="Tiantui_Stars_Blade.CompProperties_AbilityTigerslayer">
+				<roundType>SavageTigerslayer</roundType>
+				<roundFiredSound>Tiantui_ChargeLaunch</roundFiredSound>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityLineDash">
+				<dashJob>Sing_LineDash</dashJob>
+				<cellsPerTick>0.6</cellsPerTick>
+				<strikeSettings>
+					<damageDefinition>Cut</damageDefinition>
+					<damageAmount>35</damageAmount>
+					<armorPenetration>0.9</armorPenetration>
+				</strikeSettings>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityJumpSlam">
+				<flyerDefinition>Tiantui_SavageFlyer</flyerDefinition>
+			</li>
+			<li Class="SingularityFramework.Sequences.CompProperties_AbilityChain">
+				<stageCount>6</stageCount>
+				<cooldownAfterFinalStageTicks>0</cooldownAfterFinalStageTicks>
+				<chargeUpJob>Sing_ChargeUp</chargeUpJob>
+				<stageSettings>
+					<li>
+						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpSound>Tiantui_Charge</chargeUpSound>
+					</li>
+					<li />
+					<li />
+					<li />
+					<li />
+					<li>
+						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpSound>Tiantui_Charge</chargeUpSound>
+					</li>
+				</stageSettings>
+			</li>
+		</comps>
+	</AbilityDef>
+</Defs>

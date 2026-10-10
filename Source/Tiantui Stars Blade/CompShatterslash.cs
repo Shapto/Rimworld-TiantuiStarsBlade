@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.Sound;
 
 namespace Tiantui_Stars_Blade
 {
@@ -38,6 +39,8 @@ namespace Tiantui_Stars_Blade
         public List<OnHitEffect> finisherOnHitEffects;
 
         public bool spendRoundsOnMiss = true;
+
+        public SoundDef swingLandedSound;
 
         public CompProperties_Shatterslash()
         {
@@ -87,7 +90,8 @@ namespace Tiantui_Stars_Blade
 
         public void Notify_StrikeLanded(Pawn attacker, Thing target)
         {
-            if (firingThisSwing && BladeComp.TrySpendRound(false))
+            if (Props.swingLandedSound != null && attacker.Map != null) Props.swingLandedSound.PlayOneShot(new TargetInfo(attacker.Position, attacker.Map));
+            if (firingThisSwing && BladeComp.TrySpendRound())
             {
                 OnHitEffect.TryApplyAll(savageThisSwing ? Props.savageTigerslayerOnHitEffects : Props.tigerslayerOnHitEffects, attacker, target);
                 if (isFinisherThisSwing) OnHitEffect.TryApplyAll(Props.finisherOnHitEffects, attacker, target);
@@ -97,7 +101,7 @@ namespace Tiantui_Stars_Blade
 
         public void Notify_StrikeMissed(Pawn attacker)
         {
-            if (firingThisSwing && Props.spendRoundsOnMiss) BladeComp.TrySpendRound(false);
+            if (firingThisSwing && Props.spendRoundsOnMiss) BladeComp.TrySpendRound();
             AdvanceCombo();
         }
 

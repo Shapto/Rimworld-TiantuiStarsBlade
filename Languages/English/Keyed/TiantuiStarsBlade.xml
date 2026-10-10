@@ -12,4 +12,6 @@
 	<Tiantui_MagazineFull>The selected magazine is already full.</Tiantui_MagazineFull>
 	<Tiantui_NoAmmoNearby>No reachable {0} to reload with.</Tiantui_NoAmmoNearby>
 	<Tiantui_Reload>Reload</Tiantui_Reload>
+	<Tiantui_AbilityOverheated>The blade is overheated.</Tiantui_AbilityOverheated>
+	<Tiantui_AbilityNoRounds>No rounds loaded.</Tiantui_AbilityNoRounds>
 </LanguageData>

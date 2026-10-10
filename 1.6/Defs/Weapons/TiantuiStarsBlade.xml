@@ -47,8 +47,11 @@
 		</tools>
 		<comps Inherit="False">
 			<li Class="CompProperties_Forbiddable"/>
-			<li>
-				<compClass>CompEquippable</compClass>
+			<li Class="CompProperties_EquippableAbility">
+				<abilityDef>Tiantui_Tigerslayer</abilityDef>
+			</li>
+			<li Class="CompProperties_EquippableAbility">
+				<abilityDef>Tiantui_PerfectedFlurry</abilityDef>
 			</li>
 			<li Class="CompProperties_Styleable"/>
 			<li Class="SingularityFramework.Relics.CompProperties_RelicAptitude">
@@ -82,6 +85,7 @@
 				</reloadSounds>
 			</li>
 			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
+				<swingLandedSound>Tiantui_Swing</swingLandedSound>
 				<tigerslayerOnHitEffects>
 					<li Class="SingularityFramework.Strikes.OnHitEffect_ExtraDamage">
 						<damageDefinition>Blunt</damageDefinition>

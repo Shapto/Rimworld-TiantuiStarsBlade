@@ -1,0 +1,15 @@
+Tiantui Star's Blade:
+1. Gunblade
+2. Two ammo types, switch between with gizmo: Tigerslayer Round (steel), Savage Tigerslayer Round (uranium)
+3. Abilities depend on round: Tigerslayer (Tigerslayer Round), Savage Tigerslayer's Perfected Flurry of Blades [超絕猛虎殺擊亂斬] (Savage round), Tripleslash (Normal attacks) (third hit triggers a round), Blasting Tripleslash (normal attacks) (every hit triggers a round) (Savage).
+4. Tigerslayer rounds (both) increase damage of the weapon and make it inflict burn damage.
+5. Inner Spirit hediff (changes to extreme strength in savage); Inner spirit directly buffs Shin from my other mod.
+6. Shin - Tiantui Star if you have this relic and shin and mang (add to the pool of shins)
+7. Downside: Overheating
+8. Aptitude influences how fast the weapon overheats 
+9. Spending ammo on the end of a skill (the third hit of tripleslash and variants) or at the end of Tigerslayer does stun damage (tremor)
+
+Visuals:
+1. Bladetrail when ammo is expended (steal from arayashiki)
+2. Exhaust flames and smoke
+3. Bladetrail when reloading/Swapping ammo

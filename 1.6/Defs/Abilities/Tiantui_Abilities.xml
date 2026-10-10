@@ -25,6 +25,8 @@
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityLineDash">
 				<dashJob>Sing_LineDash</dashJob>
 				<cellsPerTick>0.5</cellsPerTick>
+				<easingPower>3</easingPower>
+				<trailFleck>DustPuff</trailFleck>
 				<strikeSettings>
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>25</damageAmount>
@@ -42,7 +44,7 @@
 					<li />
 					<li />
 					<li>
-						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpTicks>108</chargeUpTicks>
 						<chargeUpSound>Tiantui_Charge</chargeUpSound>
 					</li>
 				</stageSettings>
@@ -76,6 +78,8 @@
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityLineDash">
 				<dashJob>Sing_LineDash</dashJob>
 				<cellsPerTick>0.6</cellsPerTick>
+				<easingPower>4</easingPower>
+				<trailFleck>DustPuff</trailFleck>
 				<strikeSettings>
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>35</damageAmount>
@@ -91,7 +95,7 @@
 				<chargeUpJob>Sing_ChargeUp</chargeUpJob>
 				<stageSettings>
 					<li>
-						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpTicks>108</chargeUpTicks>
 						<chargeUpSound>Tiantui_Charge</chargeUpSound>
 					</li>
 					<li />
@@ -99,7 +103,7 @@
 					<li />
 					<li />
 					<li>
-						<chargeUpTicks>132</chargeUpTicks>
+						<chargeUpTicks>108</chargeUpTicks>
 						<chargeUpSound>Tiantui_Charge</chargeUpSound>
 					</li>
 				</stageSettings>

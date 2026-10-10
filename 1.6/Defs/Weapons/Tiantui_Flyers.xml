@@ -4,8 +4,8 @@
 		<defName>Tiantui_TigerslayerFlyer</defName>
 		<thingClass>SingularityFramework.Sequences.PawnFlyer_LandingSlam</thingClass>
 		<pawnFlyer>
-			<flightDurationMin>0.5</flightDurationMin>
-			<flightSpeed>12</flightSpeed>
+			<flightDurationMin>0.25</flightDurationMin>
+			<flightSpeed>25</flightSpeed>
 			<heightFactor>0.035</heightFactor>
 		</pawnFlyer>
 		<modExtensions>
@@ -22,9 +22,9 @@
 		<defName>Tiantui_SavageFlyer</defName>
 		<thingClass>SingularityFramework.Sequences.PawnFlyer_LandingSlam</thingClass>
 		<pawnFlyer>
-			<flightDurationMin>0.5</flightDurationMin>
-			<flightSpeed>12</flightSpeed>
-			<heightFactor>0.035</heightFactor>
+			<flightDurationMin>0.25</flightDurationMin>
+			<flightSpeed>20</flightSpeed>
+			<heightFactor>0.045</heightFactor>
 		</pawnFlyer>
 		<modExtensions>
 			<li Class="SingularityFramework.Sequences.ModExtension_LandingSlam">

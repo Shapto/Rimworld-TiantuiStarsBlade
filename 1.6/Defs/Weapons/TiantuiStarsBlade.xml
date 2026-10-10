@@ -60,6 +60,7 @@
 					<MeleeWeapon_DamageMultiplier>0.6</MeleeWeapon_DamageMultiplier>
 				</unworthyStatFactors>
 			</li>
+			<li Class="TiantuiStarsBlade.CompProperties_TiantuiBlade"/>
 		</comps>
 	</ThingDef>
 </Defs>

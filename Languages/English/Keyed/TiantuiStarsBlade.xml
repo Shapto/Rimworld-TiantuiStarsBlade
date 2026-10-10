@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<Tiantui_LoadTigerslayerRounds>Load Tigerslayer Rounds</Tiantui_LoadTigerslayerRounds>
+	<Tiantui_LoadSavageTigerslayerRounds>Load Savage Tigerslayer Rounds</Tiantui_LoadSavageTigerslayerRounds>
+	<Tiantui_SwitchRoundTypeDescription>Switch which round type the blade fires. Rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeDescription>
+</LanguageData>

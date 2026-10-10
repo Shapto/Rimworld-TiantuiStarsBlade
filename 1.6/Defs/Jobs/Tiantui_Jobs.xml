@@ -6,4 +6,10 @@
 		<reportString>reloading the Tiantui Star's Blade.</reportString>
 		<casualInterruptible>false</casualInterruptible>
 	</JobDef>
+	<JobDef>
+		<defName>Tiantui_SwitchRounds</defName>
+		<driverClass>Tiantui_Stars_Blade.JobDriver_SwitchTiantuiRounds</driverClass>
+		<reportString>loading the other rounds.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
 </Defs>

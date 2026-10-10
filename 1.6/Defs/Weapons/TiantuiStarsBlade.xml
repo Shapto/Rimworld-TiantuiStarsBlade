@@ -41,6 +41,8 @@
 				<power>27</power>
 				<cooldownTime>2</cooldownTime>
 				<armorPenetration>0.9</armorPenetration>
+				<soundMeleeHit>Tiantui_Swing</soundMeleeHit>
+				<soundMeleeMiss>Tiantui_Swing</soundMeleeMiss>
 			</li>
 		</tools>
 		<comps Inherit="False">
@@ -66,6 +68,18 @@
 				<innerStrengthHediff>Tiantui_InnerStrength</innerStrengthHediff>
 				<tigerslayerAmmoDef>Steel</tigerslayerAmmoDef>
 				<savageTigerslayerAmmoDef>Uranium</savageTigerslayerAmmoDef>
+				<roundFiredSound>Tiantui_Gunshot</roundFiredSound>
+				<overheatSound>Tiantui_Overheat</overheatSound>
+				<coolOffSound>Tiantui_CoolOff</coolOffSound>
+				<equipSound>Tiantui_Equip</equipSound>
+				<reloadSounds>
+					<li>Tiantui_Reload1</li>
+					<li>Tiantui_Reload2</li>
+					<li>Tiantui_Reload3</li>
+					<li>Tiantui_Reload4</li>
+					<li>Tiantui_Reload5</li>
+					<li>Tiantui_Reload6</li>
+				</reloadSounds>
 			</li>
 			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
 				<tigerslayerOnHitEffects>

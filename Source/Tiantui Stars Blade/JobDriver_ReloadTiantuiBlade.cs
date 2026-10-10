@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace Tiantui_Stars_Blade
 {
@@ -21,6 +22,7 @@ namespace Tiantui_Stars_Blade
         /// </summary>
         private bool AmmoIsCarried => AmmoStack?.ParentHolder is Pawn_InventoryTracker;
 
+
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             if (AmmoIsCarried) return true;
@@ -31,17 +33,17 @@ namespace Tiantui_Stars_Blade
         {
             this.FailOn(() => BladeComp == null);
             int reloadTicks = BladeComp?.Props.reloadTicks ?? 120;
-
+            List<SoundDef> reloadSounds = BladeComp?.Props.reloadSounds;
             if (AmmoIsCarried)
             {
                 this.FailOn(() => AmmoStack == null || AmmoStack.Destroyed);
-                yield return Toils_General.Wait(reloadTicks);
+                yield return Toils_General.Wait(reloadTicks).WithSoundsSpreadOver(reloadSounds, reloadTicks);
             }
             else
             {
                 this.FailOnDespawnedNullOrForbidden(AmmoStackIndex);
                 yield return Toils_Goto.GotoThing(AmmoStackIndex, PathEndMode.Touch);
-                yield return Toils_General.Wait(reloadTicks, AmmoStackIndex).WithProgressBarToilDelay(AmmoStackIndex);
+                yield return Toils_General.Wait(reloadTicks, AmmoStackIndex).WithProgressBarToilDelay(AmmoStackIndex).WithSoundsSpreadOver(reloadSounds, reloadTicks);
             }
 
             Toil loadRounds = ToilMaker.MakeToil("LoadRounds");

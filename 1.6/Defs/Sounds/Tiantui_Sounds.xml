@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<SoundDef>
+		<defName>Tiantui_Swing</defName>
+		<context>MapOnly</context>
+		<maxSimultaneous>3</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Folder">
+						<clipFolderPath>Normal</clipFolderPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+				<pitchRange>0.95~1.05</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef Name="Tiantui_ReloadStepBase" Abstract="True">
+		<context>MapOnly</context>
+		<maxSimultaneous>2</maxSimultaneous>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload1</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload1</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload2</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload2</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload3</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload3</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload4</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload4</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload5</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload5</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	<SoundDef ParentName="Tiantui_ReloadStepBase">
+		<defName>Tiantui_Reload6</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Reload/Tiantui_Reload6</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef Name="Tiantui_SingleSoundBase" Abstract="True">
+		<context>MapOnly</context>
+		<maxSimultaneous>2</maxSimultaneous>
+	</SoundDef>
+	
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_Gunshot</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Gunshot</clipPath>
+					</li>
+				</grains>
+				<volumeRange>45~45</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_Overheat</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Overheat</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_CoolOff</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>CoolOff</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_Equip</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Equip</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_Charge</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Charge</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_ChargeLaunch</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>ChargeLaunch</clipPath>
+					</li>
+				</grains>
+				<volumeRange>45~45</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_NormalLanding</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>NormalLanding</clipPath>
+					</li>
+				</grains>
+				<volumeRange>50~50</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef ParentName="Tiantui_SingleSoundBase">
+		<defName>Tiantui_SavageLanding</defName>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>SavageLanding</clipPath>
+					</li>
+				</grains>
+				<volumeRange>50~50</volumeRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+</Defs>

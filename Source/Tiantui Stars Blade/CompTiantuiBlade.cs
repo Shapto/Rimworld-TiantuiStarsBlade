@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace Tiantui_Stars_Blade
 {
@@ -46,6 +47,12 @@ namespace Tiantui_Stars_Blade
         public int ammoPerSavageTigerslayerRound = 2;
 
         public int reloadTicks = 120;
+
+        public SoundDef roundFiredSound;
+        public SoundDef overheatSound;
+        public SoundDef coolOffSound;
+        public SoundDef equipSound;
+        public List<SoundDef> reloadSounds;
 
         public CompProperties_TiantuiBlade()
         {
@@ -93,7 +100,11 @@ namespace Tiantui_Stars_Blade
         {
             get
             {
-                if (isOverheated && CurrentHeat < Props.overheatClearsBelowHeat) isOverheated = false;
+                if (isOverheated && CurrentHeat < Props.overheatClearsBelowHeat)
+                {
+                    isOverheated = false;
+                    PlayAtWielder(Props.coolOffSound);
+                }
                 return isOverheated;
             }
         }
@@ -119,6 +130,7 @@ namespace Tiantui_Stars_Blade
             if (isJumpSlam) baseHeat *= Props.jumpSlamHeatMultiplier;
 
             AddHeat(baseHeat);
+            PlayAtWielder(Props.roundFiredSound);
             return true;
         }
 
@@ -126,6 +138,13 @@ namespace Tiantui_Stars_Blade
         {
             selectedRoundType = IsSavageModeActive ? TigerslayerRoundType.Tigerslayer : TigerslayerRoundType.SavageTigerslayer;
             UpdateInnerStrengthStage();
+        }
+
+        private void PlayAtWielder(SoundDef sound)
+        {
+            Pawn wielder = Wielder;
+            if (sound == null || wielder?.Map == null) return;
+            sound.PlayOneShot(new TargetInfo(wielder.Position, wielder.Map));
         }
 
         public void ReloadFrom(Thing ammoStack)
@@ -179,6 +198,7 @@ namespace Tiantui_Stars_Blade
 
             storedHeat = Props.maximumHeat;
             isOverheated = true;
+            PlayAtWielder(Props.overheatSound);
 
             Pawn wielder = Wielder;
             if (wielder == null || Props.overheatHediff == null) return;

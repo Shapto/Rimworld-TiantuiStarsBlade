@@ -229,6 +229,8 @@ namespace Tiantui_Stars_Blade
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
+            if (pawn.Spawned && Props.equipSound != null) Props.equipSound.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map));
+            if (IsOverheated && Props.overheatHediff != null && !pawn.health.hediffSet.HasHediff(Props.overheatHediff)) pawn.health.AddHediff(Props.overheatHediff);
             if (Props.innerStrengthHediff == null) return;
             if (!pawn.health.hediffSet.HasHediff(Props.innerStrengthHediff)) pawn.health.AddHediff(Props.innerStrengthHediff);
             UpdateInnerStrengthStage();
@@ -237,8 +239,6 @@ namespace Tiantui_Stars_Blade
         public override void Notify_Unequipped(Pawn pawn)
         {
             base.Notify_Unequipped(pawn);
-            if (pawn.Spawned && Props.equipSound != null) Props.equipSound.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map));
-            if (IsOverheated && Props.overheatHediff != null && !pawn.health.hediffSet.HasHediff(Props.overheatHediff)) pawn.health.AddHediff(Props.overheatHediff);
             if (Props.innerStrengthHediff == null) return;
             Hediff innerStrength = pawn.health.hediffSet.GetFirstHediffOfDef(Props.innerStrengthHediff);
             if (innerStrength != null) pawn.health.RemoveHediff(innerStrength);

@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using SingularityFramework.Equipment;
+using SingularityFramework.Sequences;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace Tiantui_Stars_Blade
         }
     }
 
-    public class CompTiantuiBlade : ThingComp, IEquippedGizmoProvider
+    public class CompTiantuiBlade : ThingComp, IEquippedGizmoProvider, ILandingSlamListener
     {
         private int tigerslayerRoundsLoaded;
         private int savageTigerslayerRoundsLoaded;
@@ -85,6 +86,8 @@ namespace Tiantui_Stars_Blade
         public int AmmoPerSelectedRound => IsSavageModeActive ? Props.ammoPerSavageTigerslayerRound : Props.ammoPerTigerslayerRound;
 
         public int RoundsMissingFromSelectedMagazine => SelectedMagazineCapacity - RoundsLoadedInSelectedMagazine;
+
+        public void Notify_LandingSlamLanded(Pawn jumper) => ForceOverheat();
 
         public float CurrentHeat
         {

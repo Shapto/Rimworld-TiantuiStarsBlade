@@ -18,7 +18,7 @@ namespace Tiantui_Stars_Blade
 
         public CompProperties_AbilityTigerslayer()
         {
-            compClass = typeof(CompProperties_AbilityTigerslayer);
+            compClass = typeof(CompAbilityEffect_Tigerslayer);
         }
     }
     public class CompAbilityEffect_Tigerslayer : CompAbilityEffect
@@ -53,9 +53,6 @@ namespace Tiantui_Stars_Blade
             if (bladeComp == null) return;
 
             bladeComp.TrySpendRound(false, Props.roundFiredSound);
-
-            CompAbilityEffect_Chain chain = parent.CompOfType<CompAbilityEffect_Chain>();
-            if (chain != null && chain.IsFinalStageBeingCast) bladeComp.ForceOverheat();
         }
     }
 }

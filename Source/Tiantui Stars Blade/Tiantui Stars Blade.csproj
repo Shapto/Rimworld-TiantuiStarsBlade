@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompShatterslash.cs" />
     <Compile Include="CompTiantuiBlade.cs" />
     <Compile Include="Gizmo_TiantuiBladeStatus.cs" />
     <Compile Include="HediffComp_TiantuiBladeLink.cs" />

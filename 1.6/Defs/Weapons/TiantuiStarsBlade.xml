@@ -65,6 +65,35 @@
 				<overheatHediff>Tiantui_Overheated</overheatHediff>
 				<innerStrengthHediff>Tiantui_InnerStrength</innerStrengthHediff>
 			</li>
+			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
+				<tigerslayerOnHitEffects>
+					<li Class="SingularityFramework.Strikes.OnHitEffect_ExtraDamage">
+						<damageDefinition>Blunt</damageDefinition>
+						<damageAmount>8</damageAmount>
+						<armorPenetration>0.9</armorPenetration>
+					</li>
+					<li Class="SingularityFramework.Strikes.OnHitEffect_ExtraDamage">
+						<damageDefinition>Burn</damageDefinition>
+						<damageAmount>6</damageAmount>
+					</li>
+				</tigerslayerOnHitEffects>
+				<savageTigerslayerOnHitEffects>
+					<li Class="SingularityFramework.Strikes.OnHitEffect_ExtraDamage">
+						<damageDefinition>Blunt</damageDefinition>
+						<damageAmount>12</damageAmount>
+						<armorPenetration>0.9</armorPenetration>
+					</li>
+					<li Class="SingularityFramework.Strikes.OnHitEffect_ExtraDamage">
+						<damageDefinition>Burn</damageDefinition>
+						<damageAmount>10</damageAmount>
+					</li>
+				</savageTigerslayerOnHitEffects>
+				<finisherOnHitEffects>
+					<li Class="SingularityFramework.Strikes.OnHitEffect_Stun">
+						<stunTicks>90</stunTicks>
+					</li>
+				</finisherOnHitEffects>
+			</li>
 		</comps>
 	</ThingDef>
 </Defs>

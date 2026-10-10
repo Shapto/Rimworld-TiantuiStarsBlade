@@ -24,11 +24,11 @@ namespace Tiantui_Stars_Blade
     /// </summary>
     public class CompProperties_TiantuiBlade : CompProperties
     {
-        public int tigerslayerMagazineCapacity = 6;
-        public int savageTigerslayerMagazineCapacity = 3;
+        public int tigerslayerMagazineCapacity = 12;
+        public int savageTigerslayerMagazineCapacity = 8;
 
         public float heatPerTigerslayerRound = 10f;
-        public float heatPerSavageTigerslayerRound = 22f;
+        public float heatPerSavageTigerslayerRound = 15f;
         public float jumpSlamHeatMultiplier = 2.5f;
 
         public float maximumHeat = 100f;

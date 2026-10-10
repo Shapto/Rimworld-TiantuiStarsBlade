@@ -278,6 +278,19 @@ namespace Tiantui_Stars_Blade
             };
             if (RoundsMissingFromSelectedMagazine <= 0) reloadCommand.Disable("Tiantui_MagazineFull".Translate());
             yield return reloadCommand;
+            if (DebugSettings.ShowDevGizmos)
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEV: Fill magazines",
+                    defaultDesc = "Fill both magazines to capacity.",
+                    action = () =>
+                    {
+                        tigerslayerRoundsLoaded = Props.tigerslayerMagazineCapacity;
+                        savageTigerslayerRoundsLoaded = Props.savageTigerslayerMagazineCapacity;
+                    }
+                };
+            }
         }
 
         public override void PostExposeData()

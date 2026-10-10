@@ -26,6 +26,7 @@
 			<Flammability>0</Flammability>
 			<DeteriorationRate>0</DeteriorationRate>
 			<MarketValue>3000</MarketValue>
+			<Tiantui_HeatBuildup>1</Tiantui_HeatBuildup>
 		</statBases>
 		<weaponClasses Inherit="False">
 			<li>Melee</li>
@@ -50,6 +51,14 @@
 			<li Class="CompProperties_Styleable"/>
 			<li Class="SingularityFramework.Relics.CompProperties_RelicAptitude">
 				<rejectsUnworthy>false</rejectsUnworthy>
+				<partialStatFactors>
+					<Tiantui_HeatBuildup>2</Tiantui_HeatBuildup>
+					<MeleeWeapon_DamageMultiplier>0.85</MeleeWeapon_DamageMultiplier>
+				</partialStatFactors>
+				<unworthyStatFactors>
+					<Tiantui_HeatBuildup>4</Tiantui_HeatBuildup>
+					<MeleeWeapon_DamageMultiplier>0.6</MeleeWeapon_DamageMultiplier>
+				</unworthyStatFactors>
 			</li>
 		</comps>
 	</ThingDef>

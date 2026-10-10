@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<StatDef>
+		<defName>Tiantui_HeatBuildup</defName>
+		<label>heat buildup</label>
+		<description>How quickly the blade heats up when Tigerslayer Rounds are fired. Wielders who lack aptitude for the blade overheat it much faster.</description>
+		<category>Weapon</category>
+		<defaultBaseValue>1</defaultBaseValue>
+		<minValue>0</minValue>
+		<toStringStyle>PercentZero</toStringStyle>
+		<showIfUndefined>false</showIfUndefined>
+	</StatDef>
+</Defs>

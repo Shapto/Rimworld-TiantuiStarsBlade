@@ -189,7 +189,16 @@ namespace Tiantui_Stars_Blade
             else tigerslayerRoundsLoaded += roundsLoaded;
         }
 
-        private void TryStartReload(Pawn wielder)
+        /// <summary>
+        /// Orders the wielder to load the other round type (a short job with the reload sounds).
+        /// </summary>
+        public void StartSwitchingRoundType(Pawn wielder)
+        {
+            if (wielder?.jobs == null) return;
+            wielder.jobs.TryTakeOrderedJob(JobMaker.MakeJob(TiantuiDefOf.Tiantui_SwitchRounds), JobTag.Misc);
+        }
+
+        public void TryStartReload(Pawn wielder)
         {
             ThingDef ammoDef = SelectedAmmoDef;
             if (wielder?.Map == null || ammoDef == null) return;
@@ -198,6 +207,12 @@ namespace Tiantui_Stars_Blade
 
             List<Thing> carriedAmmo = wielder.inventory?.innerContainer.Where(carriedThing => carriedThing.def == ammoDef).ToList();
             Thing ammoStack = carriedAmmo != null && carriedAmmo.Sum(carriedThing => carriedThing.stackCount) >= ammoPerRound ? carriedAmmo[0] : null;
+           
+            if (RoundsMissingFromSelectedMagazine <= 0)
+            {
+                Messages.Message("Tiantui_MagazineFull".Translate(), wielder, MessageTypeDefOf.RejectInput, false);
+                return;
+            }
 
             if (ammoStack == null)
             {
@@ -264,20 +279,7 @@ namespace Tiantui_Stars_Blade
         public IEnumerable<Gizmo> GetEquippedGizmos(Pawn wielder)
         {
             yield return new Gizmo_TiantuiBladeStatus { bladeComp = this, wielder = wielder };
-            yield return new Command_Action
-            {
-                defaultLabel = IsSavageModeActive ? "Tiantui_LoadTigerslayerRounds".Translate() : "Tiantui_LoadSavageTigerslayerRounds".Translate(),
-                defaultDesc = "Tiantui_SwitchRoundTypeDescription".Translate(),
-                action = () => wielder.jobs.TryTakeOrderedJob(JobMaker.MakeJob(TiantuiDefOf.Tiantui_SwitchRounds), JobTag.Misc)
-            };
-            Command_Action reloadCommand = new Command_Action
-            {
-                defaultLabel = "Tiantui_Reload".Translate(),
-                defaultDesc = "Tiantui_ReloadDescription".Translate(SelectedAmmoDef?.label ?? "?", AmmoPerSelectedRound),
-                action = () => TryStartReload(wielder)
-            };
-            if (RoundsMissingFromSelectedMagazine <= 0) reloadCommand.Disable("Tiantui_MagazineFull".Translate());
-            yield return reloadCommand;
+
             if (DebugSettings.ShowDevGizmos)
             {
                 yield return new Command_Action

@@ -40,7 +40,7 @@ namespace Tiantui_Stars_Blade
                 float roundTypeWidth = Mathf.Max(Text.CalcSize("Tiantui_TigerslayerRoundsName".Translate()).x, Text.CalcSize("Tiantui_SavageTigerslayerRoundsName".Translate()).x);
                 float aptitudeWidth = Text.CalcSize(RelicAptitude.Label(AptitudeLevel.Partial).CapitalizeFirst()).x;
                 Text.Font = previousFont;
-                cachedContentWidth = roundTypeWidth + aptitudeWidth + 12f + 10f;
+                cachedContentWidth = roundTypeWidth + 8f + aptitudeWidth + 12f + 10f;
             }
             return Mathf.Clamp(cachedContentWidth, 180f, maximumWidth);
         }
@@ -60,7 +60,9 @@ namespace Tiantui_Stars_Blade
 
             Text.Font = GameFont.Tiny;
             string roundTypeLabel = bladeComp.IsSavageModeActive ? "Tiantui_SavageTigerslayerRoundsName".Translate() : "Tiantui_TigerslayerRoundsName".Translate();
-            Widgets.Label(topRowRect, roundTypeLabel);
+            float roundTypeButtonWidth = Text.CalcSize(roundTypeLabel).x + 8f;
+            Rect roundTypeButtonRect = new Rect(topRowRect.x, topRowRect.y, roundTypeButtonWidth, topRowRect.height);
+            if (Widgets.ButtonText(roundTypeButtonRect, roundTypeLabel)) bladeComp.StartSwitchingRoundType(wielder);
 
             if (aptitudeComp != null && wielder != null)
             {
@@ -80,6 +82,8 @@ namespace Tiantui_Stars_Blade
 
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(ammoBarRect, $"{roundsLoaded} / {magazineCapacity}");
+            Widgets.DrawHighlightIfMouseover(ammoBarRect);
+            if (Widgets.ButtonInvisible(ammoBarRect)) bladeComp.TryStartReload(wielder);
 
             float currentHeat = bladeComp.CurrentHeat;
             bool isOverheated = bladeComp.IsOverheated;
@@ -98,6 +102,9 @@ namespace Tiantui_Stars_Blade
                 string heatTooltip = "Tiantui_HeatTooltip".Translate(currentHeat.ToString("0"), bladeComp.Props.maximumHeat.ToString("0"), bladeComp.Props.overheatClearsBelowHeat.ToString("0"));
                 string aptitudeTooltip = aptitudeComp != null && wielder != null ? RelicAptitude.DescribeAptitude(wielder, aptitudeComp.Props, bladeComp.parent.def) : string.Empty;
                 string tooltipText = aptitudeTooltip.NullOrEmpty() ? heatTooltip : aptitudeTooltip + "\n\n" + heatTooltip;
+                tooltipText += "\n\n" + "Tiantui_SwitchRoundTypeHint".Translate();
+                tooltipText += "\n\n" + "Tiantui_SwitchRoundTypeHint".Translate();
+                tooltipText += "\n" + "Tiantui_ReloadHint".Translate(bladeComp.SelectedAmmoDef?.label ?? "?", bladeComp.AmmoPerSelectedRound);
                 TooltipHandler.TipRegion(outerRect, tooltipText);
             }
 

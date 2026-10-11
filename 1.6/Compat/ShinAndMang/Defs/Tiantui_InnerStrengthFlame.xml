@@ -16,16 +16,5 @@
 			<shaderType>Mote</shaderType>
 			<drawSize>1.3</drawSize>
 		</graphicData>
-		<modExtensions>
-			<li Class="Tiantui_Stars_Blade.ShinCompat.ModExtension_FlameFrames">
-				<framePaths>
-					<li>VFX/InnerStrengthFlame_A</li>
-					<li>VFX/InnerStrengthFlame_B</li>
-					<li>VFX/InnerStrengthFlame_C</li>
-					<li>VFX/InnerStrengthFlame_D</li>
-				</framePaths>
-				<ticksPerFrame>6</ticksPerFrame>
-			</li>
-		</modExtensions>
 	</ThingDef>
 </Defs>

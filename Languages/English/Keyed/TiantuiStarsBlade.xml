@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<Tiantui_LoadTigerslayerRounds>Load Tigerslayer Rounds</Tiantui_LoadTigerslayerRounds>
-	<Tiantui_LoadSavageTigerslayerRounds>Load Savage Tigerslayer Rounds</Tiantui_LoadSavageTigerslayerRounds>
 	<Tiantui_TigerslayerRoundsName>Tigerslayer Rounds</Tiantui_TigerslayerRoundsName>
 	<Tiantui_SavageTigerslayerRoundsName>Savage Tigerslayer Rounds</Tiantui_SavageTigerslayerRoundsName>
 	<Tiantui_HeatLabel>Heat {0}</Tiantui_HeatLabel>
 	<Tiantui_Overheated>OVERHEATED</Tiantui_Overheated>
 	<Tiantui_HeatTooltip>Heat: {0} / {1}. Firing rounds builds heat; it cools over time. At the maximum the blade overheats until it cools below {2}.</Tiantui_HeatTooltip>
-	<Tiantui_SwitchRoundTypeDescription>Load the other round type. Takes a moment; rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeDescription>
-	<Tiantui_ReloadDescription>Go to the nearest {0} and load rounds into the selected magazine. Each round costs {1} {0}.</Tiantui_ReloadDescription>
 	<Tiantui_MagazineFull>The selected magazine is already full.</Tiantui_MagazineFull>
 	<Tiantui_NoAmmoNearby>No reachable {0} to reload with.</Tiantui_NoAmmoNearby>
-	<Tiantui_Reload>Reload</Tiantui_Reload>
 	<Tiantui_AbilityOverheated>The blade is overheated.</Tiantui_AbilityOverheated>
 	<Tiantui_AbilityNoRounds>No rounds loaded.</Tiantui_AbilityNoRounds>
 	<Tiantui_ShinUnrelentingSpirit_Effect>- Damage dealt +{2} (up to +{0} at 40% health missing). Melee hit chance up to +{1} the same way.\n- Damage dealt to anyone fighting the user: +{3} per cell/s faster than them, up to +{4}.\n- Melee hits: {5} chance to stun for {6} s.</Tiantui_ShinUnrelentingSpirit_Effect>
 	<Tiantui_ShinUnrelentingSpirit_Targeting>{0}: +{1} damage</Tiantui_ShinUnrelentingSpirit_Targeting>
+	<Tiantui_InnerStrengthShinBonus>While Shin (心) is active: damage taken x{0}, pain shock threshold +{1}.</Tiantui_InnerStrengthShinBonus>
+	<Tiantui_SwitchRoundTypeHint>Click the round name to load the other round type. Rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeHint>
+	<Tiantui_ReloadHint>Click the ammo bar to reload the selected magazine from the nearest {0}. Each round costs {1} {0}.</Tiantui_ReloadHint>
 </LanguageData>

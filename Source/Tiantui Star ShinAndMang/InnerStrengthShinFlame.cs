@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
-namespace Tiantui_Star_ShinAndMang
+namespace Tiantui_Stars_Blade.ShinCompat
 {
     public class HediffCompProperties_InnerStrengthShinFlame : HediffCompProperties
     {
@@ -37,71 +37,109 @@ namespace Tiantui_Star_ShinAndMang
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
-            if (!Pawn.Spawned || Props.flameMote == null || !ShinMechanics.IsShinActive(Pawn)) return;
+            if (!Pawn.Spawned || !ShinMechanics.IsShinActive(Pawn)) return;
 
-            if (flameMote == null || flameMote.Destroyed) flameMote = MoteMaker.MakeAttachedOverlay(Pawn, Props.flameMote, Vector3.zero);
-            flameMote.linearScale = Vector3.one * (parent.Severity >= 2f ? Props.extremeScale : 1f);
-            flameMote.Maintain();
+            if (Props.flameMote != null)
+            {
+                if (flameMote == null || flameMote.Destroyed) flameMote = MoteMaker.MakeAttachedOverlay(Pawn, Props.flameMote, Vector3.zero);
+                flameMote.linearScale = Vector3.one * (parent.Severity >= 2f ? Props.extremeScale : 1f);
+                flameMote.Maintain();
+            }
+        }
+
+        public override string CompTipStringExtra
+        {
+            get
+            {
+                bool isExtreme = parent.Severity >= 2f;
+                float damageTakenFactor = isExtreme ? InnerStrengthShinStats.ExtremeInnerStrengthDamageTakenFactor : InnerStrengthShinStats.InnerStrengthDamageTakenFactor;
+                float painShockThresholdOffset = isExtreme ? InnerStrengthShinStats.ExtremeInnerStrengthPainShockThresholdOffset : InnerStrengthShinStats.InnerStrengthPainShockThresholdOffset;
+                return "Tiantui_InnerStrengthShinBonus".Translate(damageTakenFactor.ToStringPercent(), painShockThresholdOffset.ToStringPercent());
+            }
         }
     }
 
     /// <summary>
-    /// Which textures a flame cycles through, and how fast. Put on the mote's ThingDef.
+    /// While Shin (心) is active, Inner Strength strengthens it: a stat change credited to Inner Strength itself.
     /// </summary>
-    public class ModExtension_FlameFrames : DefModExtension
+    public class StatPart_InnerStrengthShin : StatPart
     {
-        public List<string> framePaths;
-        public int ticksPerFrame = 6;
+        public HediffDef innerStrengthHediff;
+        public float innerStrengthValue;
+        public float extremeInnerStrengthValue;
+        public bool isFactor;
+
+        /// <summary>
+        /// The value for this pawn's current Inner Strength stage, if they have it and Shin (心) is active.
+        /// </summary>
+        private bool TryGetValue(StatRequest request, out float value, out Hediff innerStrength)
+        {
+            value = isFactor ? 1f : 0f;
+            innerStrength = null;
+            if (!(request.Thing is Pawn pawn) || innerStrengthHediff == null || !ShinMechanics.IsShinActive(pawn)) return false;
+
+            innerStrength = pawn.health.hediffSet.GetFirstHediffOfDef(innerStrengthHediff);
+            if (innerStrength == null) return false;
+
+            value = innerStrength.Severity >= 2f ? extremeInnerStrengthValue : innerStrengthValue;
+            return true;
+        }
+
+        public override void TransformValue(StatRequest request, ref float value)
+        {
+            if (!TryGetValue(request, out float partValue, out _)) return;
+            if (isFactor) value *= partValue;
+            else value += partValue;
+        }
+
+        public override string ExplanationPart(StatRequest request)
+        {
+            if (!TryGetValue(request, out float partValue, out Hediff innerStrength)) return null;
+            string valueText = isFactor ? "x" + partValue.ToStringPercent() : parentStat.ValueToString(partValue, ToStringNumberSense.Offset);
+            return innerStrength.LabelCap + " (Shin (心)): " + valueText;
+        }
     }
 
     /// <summary>
-    /// A flickering flame drawn just above the Shin (心) glow and below the pawn.
+    /// At startup, adds Inner Strength's Shin (心) bonus to the stats it changes.
+    /// </summary>
+    [StaticConstructorOnStartup]
+    public static class InnerStrengthShinStats
+    {
+        public const float InnerStrengthDamageTakenFactor = 0.95f;
+        public const float ExtremeInnerStrengthDamageTakenFactor = 0.90f;
+        public const float InnerStrengthPainShockThresholdOffset = 0.03f;
+        public const float ExtremeInnerStrengthPainShockThresholdOffset = 0.06f;
+
+        static InnerStrengthShinStats()
+        {
+            HediffDef innerStrengthHediff = DefDatabase<HediffDef>.GetNamedSilentFail("Tiantui_InnerStrength");
+            if (innerStrengthHediff == null) return;
+
+            AddPart(StatDefOf.IncomingDamageFactor, innerStrengthHediff, InnerStrengthDamageTakenFactor, ExtremeInnerStrengthDamageTakenFactor, true);
+            AddPart(StatDefOf.PainShockThreshold, innerStrengthHediff, InnerStrengthPainShockThresholdOffset, ExtremeInnerStrengthPainShockThresholdOffset, false);
+        }
+
+        private static void AddPart(StatDef stat, HediffDef innerStrengthHediff, float innerStrengthValue, float extremeInnerStrengthValue, bool isFactor)
+        {
+            if (stat.parts == null) stat.parts = new List<StatPart>();
+            stat.parts.Add(new StatPart_InnerStrengthShin { parentStat = stat, innerStrengthHediff = innerStrengthHediff, innerStrengthValue = innerStrengthValue, extremeInnerStrengthValue = extremeInnerStrengthValue, isFactor = isFactor });
+        }
+    }
+
+    /// <summary>
+    /// A red glow drawn just above the Shin (心) glow and below the pawn.
     /// </summary>
     public class Mote_InnerStrengthFlame : MoteAttached
     {
         private const float AltitudeAboveShinGlow = 0.01f;
 
-        private static readonly MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-        private static readonly Dictionary<ThingDef, List<Material>> frameMaterialsByDef = new Dictionary<ThingDef, List<Material>>();
-
-        private List<Material> FrameMaterials
-        {
-            get
-            {
-                if (frameMaterialsByDef.TryGetValue(def, out List<Material> frameMaterials)) return frameMaterials;
-
-                frameMaterials = new List<Material>();
-                List<string> framePaths = def.GetModExtension<ModExtension_FlameFrames>()?.framePaths;
-                if (framePaths != null)
-                {
-                    foreach (string framePath in framePaths)
-                        frameMaterials.Add(MaterialPool.MatFrom(framePath, ShaderDatabase.Mote));
-                }
-                if (frameMaterials.Count == 0) frameMaterials.Add(Graphic.MatSingle);
-
-                frameMaterialsByDef[def] = frameMaterials;
-                return frameMaterials;
-            }
-        }
-
         protected override void DrawAt(Vector3 drawLocation, bool flip = false)
         {
-            float alpha = Alpha;
-            if (alpha <= 0f) return;
-
-            List<Material> frameMaterials = FrameMaterials;
-            int ticksPerFrame = Mathf.Max(1, def.GetModExtension<ModExtension_FlameFrames>()?.ticksPerFrame ?? 6);
-            int frameIndex = (Find.TickManager.TicksGame / ticksPerFrame + thingIDNumber) % frameMaterials.Count;
-
-            Color flameColor = instanceColor;
-            flameColor.a *= alpha;
-            propertyBlock.SetColor("_Color", flameColor);
-
+            // Same layer as the Shin (心) glow, nudged up so it draws over the glow but under the pawn.
             drawLocation.y = AltitudeLayer.MoteLow.AltitudeFor() + AltitudeAboveShinGlow;
-
-            Vector2 drawSize = def.graphicData.drawSize * linearScale.x;
-            Matrix4x4 matrix = Matrix4x4.TRS(drawLocation, Quaternion.identity, new Vector3(drawSize.x, 1f, drawSize.y));
-            Graphics.DrawMesh(MeshPool.plane10, matrix, frameMaterials[frameIndex], 0, null, 0, propertyBlock);
+            base.DrawAt(drawLocation, flip);
         }
+   
     }
 }

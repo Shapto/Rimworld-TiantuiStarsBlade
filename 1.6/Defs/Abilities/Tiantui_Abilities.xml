@@ -2,8 +2,8 @@
 <Defs>
 	<AbilityDef>
 		<defName>Tiantui_Tigerslayer</defName>
-		<label>Tigerslayer</label>
-		<description>TODO</description>
+		<label>Tanglecleaver【快刀亂麻】</label>
+		<description>'I'maboutta drop somethin' big on y'all! Don't let it kill y'all now and spoil the fun!'</description>
 		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
 		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
@@ -55,8 +55,8 @@
 
 	<AbilityDef>
 		<defName>Tiantui_PerfectedFlurry</defName>
-		<label>Savage Tigerslayer's Perfected Flurry of Blades</label>
-		<description>TODO</description>
+		<label>Savage Tigerslayer's Perfected Flurry of Blades【超絕猛虎殺擊亂斬】</label>
+		<description>'Prepare to meet my unbridled might.'</description>
 		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
 		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>

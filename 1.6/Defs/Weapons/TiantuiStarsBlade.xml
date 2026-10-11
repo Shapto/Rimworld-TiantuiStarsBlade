@@ -3,7 +3,7 @@
 	<ThingDef ParentName="BaseMeleeWeapon_Sharp">
 		<defName>TiantuiStarsBlade</defName>
 		<label>Tiantui Star's Blade</label>
-		<description>TODO</description>
+		<description>A hefty, heavily customized broadsword forged from a relic blade. It is fitted with a cylinder firing specialized ammunition to boost it forward through exhausts lining the blade's spine, allowing for immense burst mobility and devastating jet-propelled slashes. It's obvious wielding such a thing requires exceptional skill and strength, but above all, it demands heart! The spirit to fight and kill! The balls to see shit through for the thrill of it all! If you're not in it for the love of the game, it'll knock you flat on your ass in no time.</description>
 		<graphicData>
 			<texPath>Weapons/TiantuiStarsBlade</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

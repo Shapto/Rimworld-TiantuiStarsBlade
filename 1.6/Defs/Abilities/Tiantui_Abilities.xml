@@ -3,7 +3,7 @@
 	<AbilityDef>
 		<defName>Tiantui_Tigerslayer</defName>
 		<label>Tanglecleaver【快刀亂麻】</label>
-		<description>'I'maboutta drop somethin' big on y'all! Don't let it kill y'all now and spoil the fun!'\nDraw a path and expend rounds to dash forward, cutting down anything in your way. Repeat two times and finish with a devastating slam.</description>
+		<description>'Firing all rounds.'\nDraw a path and expend rounds to dash forward, cutting down anything in your way. Repeat two times and finish with a devastating slam.</description>
 		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
 		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>

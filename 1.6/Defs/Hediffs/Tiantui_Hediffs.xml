@@ -3,7 +3,7 @@
 	<HediffDef>
 		<defName>Tiantui_Overheated</defName>
 		<label>Overheat</label>
-		<description>The Tiantui Star's Blade has overheated. Its rounds can't be fired until it cools, its strikes land weaker, and the scorching steel leaves its wielder exposed.</description>
+		<description>'Ya done fucked up.'\nThe Tiantui Star's Blade has overheated. It cannot fire until it cools, its strikes land weaker, and the scorching metal leaves this pawn exposed.</description>
 		<hediffClass>HediffWithComps</hediffClass>
 		<defaultLabelColor>(0.95, 0.4, 0.2)</defaultLabelColor>
 		<isBad>true</isBad>
@@ -28,7 +28,7 @@
 	<HediffDef>
 		<defName>Tiantui_InnerStrength</defName>
 		<label>Inner Strength</label>
-		<description>TODO</description>
+		<description>This pawn's sheer lust for battle overflows into a projection of outward strength.</description>
 		<hediffClass>HediffWithComps</hediffClass>
 		<defaultLabelColor>(0.85, 0.2, 0.15)</defaultLabelColor>
 		<isBad>false</isBad>

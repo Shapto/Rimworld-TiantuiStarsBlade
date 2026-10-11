@@ -3,7 +3,7 @@
 	<AbilityDef>
 		<defName>Tiantui_Tigerslayer</defName>
 		<label>Tanglecleaver【快刀亂麻】</label>
-		<description>'I'maboutta drop somethin' big on y'all! Don't let it kill y'all now and spoil the fun!'</description>
+		<description>'I'maboutta drop somethin' big on y'all! Don't let it kill y'all now and spoil the fun!'\nDraw a path and expend rounds to dash forward, cutting down anything in your way. Repeat two times and finish with a devastating slam.</description>
 		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
 		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
@@ -57,7 +57,7 @@
 	<AbilityDef>
 		<defName>Tiantui_PerfectedFlurry</defName>
 		<label>Savage Tigerslayer's Perfected Flurry of Blades【超絕猛虎殺擊亂斬】</label>
-		<description>'Prepare to meet my unbridled might.'</description>
+		<description>'Prepare to meet my unbridled might.'\nDraw a path and expend a round to charge up and dash forward with great strength, shredding through anything in your way. Repeat five times and finish with an almighty slam.</description>
 		<iconPath>Weapons/TiantuiStarsBlade</iconPath>
 		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>

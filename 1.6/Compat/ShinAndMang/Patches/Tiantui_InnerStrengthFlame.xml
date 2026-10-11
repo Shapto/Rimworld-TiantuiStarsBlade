@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffDef[defName="Tiantui_InnerStrength"]/comps</xpath>
+		<value>
+			<li Class="Tiantui_Stars_Blade.ShinCompat.HediffCompProperties_InnerStrengthShinFlame">
+				<flameMote>Tiantui_Mote_InnerStrengthFlame</flameMote>
+			</li>
+		</value>
+	</Operation>
+</Patch>

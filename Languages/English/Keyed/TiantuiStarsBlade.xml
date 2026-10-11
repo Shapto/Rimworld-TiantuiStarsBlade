@@ -14,4 +14,6 @@
 	<Tiantui_Reload>Reload</Tiantui_Reload>
 	<Tiantui_AbilityOverheated>The blade is overheated.</Tiantui_AbilityOverheated>
 	<Tiantui_AbilityNoRounds>No rounds loaded.</Tiantui_AbilityNoRounds>
+	<Tiantui_ShinUnrelentingSpirit_Effect>- Damage dealt +{2} (up to +{0} at 40% health missing). Melee hit chance up to +{1} the same way.\n- Damage dealt to anyone fighting the user: +{3} per cell/s faster than them, up to +{4}.\n- Melee hits: {5} chance to stun for {6} s.</Tiantui_ShinUnrelentingSpirit_Effect>
+	<Tiantui_ShinUnrelentingSpirit_Targeting>{0}: +{1} damage</Tiantui_ShinUnrelentingSpirit_Targeting>
 </LanguageData>

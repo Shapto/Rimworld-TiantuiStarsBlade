@@ -27,6 +27,7 @@
 				<cellsPerTick>0.5</cellsPerTick>
 				<easingPower>3</easingPower>
 				<trailFleck>DustPuff</trailFleck>
+				<dashJob>Tiantui_Dash</dashJob>
 				<strikeSettings>
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>25</damageAmount>
@@ -81,6 +82,7 @@
 				<cellsPerTick>0.6</cellsPerTick>
 				<easingPower>4</easingPower>
 				<trailFleck>DustPuff</trailFleck>
+				<dashJob>Tiantui_Dash</dashJob>
 				<strikeSettings>
 					<damageDefinition>Cut</damageDefinition>
 					<damageAmount>35</damageAmount>

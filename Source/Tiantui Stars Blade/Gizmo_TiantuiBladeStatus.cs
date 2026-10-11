@@ -99,12 +99,11 @@ namespace Tiantui_Stars_Blade
             {
                 Widgets.DrawHighlight(outerRect);
 
-                string heatTooltip = "Tiantui_HeatTooltip".Translate(currentHeat.ToString("0"), bladeComp.Props.maximumHeat.ToString("0"), bladeComp.Props.overheatClearsBelowHeat.ToString("0"));
+                string heatTooltip = "Tiantui_HeatTooltip".Translate(currentHeat.ToString("0"), bladeComp.Props.maximumHeat.ToString("0"), bladeComp.Props.overheatClearsBelowHeat.ToString("0")).Resolve();
                 string aptitudeTooltip = aptitudeComp != null && wielder != null ? RelicAptitude.DescribeAptitude(wielder, aptitudeComp.Props, bladeComp.parent.def) : string.Empty;
                 string tooltipText = aptitudeTooltip.NullOrEmpty() ? heatTooltip : aptitudeTooltip + "\n\n" + heatTooltip;
-                tooltipText += "\n\n" + "Tiantui_SwitchRoundTypeHint".Translate();
-                tooltipText += "\n\n" + "Tiantui_SwitchRoundTypeHint".Translate();
-                tooltipText += "\n" + "Tiantui_ReloadHint".Translate(bladeComp.SelectedAmmoDef?.label ?? "?", bladeComp.AmmoPerSelectedRound);
+                tooltipText += "\n\n" + "Tiantui_SwitchRoundTypeHint".Translate().Resolve();
+                tooltipText += "\n" + "Tiantui_ReloadHint".Translate(bladeComp.SelectedAmmoDef?.label ?? "?", bladeComp.AmmoPerSelectedRound).Resolve();
                 TooltipHandler.TipRegion(outerRect, tooltipText);
             }
 

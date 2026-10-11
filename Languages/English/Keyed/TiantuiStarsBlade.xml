@@ -14,4 +14,7 @@
 	<Tiantui_InnerStrengthShinBonus>While Shin (心) is active: damage taken x{0}, pain shock threshold +{1}.</Tiantui_InnerStrengthShinBonus>
 	<Tiantui_SwitchRoundTypeHint>Click the round name to load the other round type. Rounds already loaded in either magazine are kept.</Tiantui_SwitchRoundTypeHint>
 	<Tiantui_ReloadHint>Click the ammo bar to reload the selected magazine from the nearest {0}. Each round costs {1} {0}.</Tiantui_ReloadHint>
+	<Tiantui_AptitudeBattleFreak>Fighting spirit</Tiantui_AptitudeBattleFreak>
+	<Tiantui_StumbleText>Stumbled!</Tiantui_StumbleText>
+	<Tiantui_StumbleDisarmed>Disarmed!</Tiantui_StumbleDisarmed>
 </LanguageData>

@@ -12,4 +12,17 @@
 		<reportString>loading the other rounds.</reportString>
 		<casualInterruptible>false</casualInterruptible>
 	</JobDef>
+	<JobDef>
+		<defName>Tiantui_Dash</defName>
+		<driverClass>Tiantui_Stars_Blade.JobDriver_TiantuiDash</driverClass>
+		<reportString>dashing.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+	<JobDef>
+		<defName>Tiantui_DashStumble</defName>
+		<driverClass>Tiantui_Stars_Blade.JobDriver_TiantuiDashStumble</driverClass>
+		<reportString>tumbling.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<playerInterruptible>false</playerInterruptible>
+	</JobDef>
 </Defs>

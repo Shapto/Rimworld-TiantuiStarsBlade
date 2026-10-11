@@ -76,8 +76,11 @@
     <Compile Include="HediffComp_TiantuiBladeLink.cs" />
     <Compile Include="JobDriver_ReloadTiantuiBlade.cs" />
     <Compile Include="JobDriver_SwitchTiantuiRounds.cs" />
+    <Compile Include="JobDriver_TiantuiDash.cs" />
+    <Compile Include="JobDriver_TiantuiDashStumble.cs" />
     <Compile Include="TiantuiDefOf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiantuiHarmony.cs" />
     <Compile Include="TiantuiToils.cs" />
   </ItemGroup>
   <ItemGroup>

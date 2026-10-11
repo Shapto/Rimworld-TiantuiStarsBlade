@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using SingularityFramework.Equipment;
+using SingularityFramework.Relics;
 using SingularityFramework.Sequences;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,17 @@ namespace Tiantui_Stars_Blade
         public SoundDef equipSound;
         public List<SoundDef> reloadSounds;
 
+        public float unworthyStumbleChance = 1f;
+        public FloatRange stumbleAtDashFraction = new FloatRange(0.3f, 0.6f);
+        public IntRange stumbleRollCells = new IntRange(4, 6);
+        public int stumbleRollTicks = 30;
+        public float stumbleRollEasingPower = 2.5f;
+        public float stumbleQuarterTurnsPerCell = 2f;
+        public int stumbleBruiseHits = 2;
+        public FloatRange stumbleBruiseDamage = new FloatRange(2f, 4f);
+        public int stumbleStunTicks = 90;
+        public float stumbleDisarmChance = 0.25f;
+
         public CompProperties_TiantuiBlade()
         {
             compClass = typeof(CompTiantuiBlade);
@@ -95,6 +107,16 @@ namespace Tiantui_Stars_Blade
             {
                 float secondsSinceChange = (Find.TickManager.TicksGame - heatLastChangedTick) / 60f;
                 return Mathf.Max(0f, storedHeat - secondsSinceChange * Props.heatCooledPerSecond);
+            }
+        }
+
+        public bool WielderIsUnworthy
+        {
+            get
+            {
+                Pawn wielder = Wielder;
+                CompRelicAptitude aptitudeComp = parent.TryGetComp<CompRelicAptitude>();
+                return wielder != null && aptitudeComp != null && RelicAptitude.GetAptitude(wielder, aptitudeComp.Props, parent.def) == AptitudeLevel.Unworthy;
             }
         }
 

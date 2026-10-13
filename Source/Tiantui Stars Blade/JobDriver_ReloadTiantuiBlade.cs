@@ -29,8 +29,15 @@ namespace Tiantui_Stars_Blade
             return pawn.Reserve(AmmoStack, job, 1, -1, null, errorOnFailed);
         }
 
+        public override void Notify_Starting()
+        {
+            base.Notify_Starting();
+            MeleeAnimationCompat.RefreshHeldWeapon(pawn);
+        }
+
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            AddFinishAction(condition => MeleeAnimationCompat.RefreshHeldWeapon(pawn));
             this.FailOn(() => BladeComp == null);
             int reloadTicks = BladeComp?.Props.reloadTicks ?? 120;
             List<SoundDef> reloadSounds = BladeComp?.Props.reloadSounds;

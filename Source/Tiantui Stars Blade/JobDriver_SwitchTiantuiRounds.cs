@@ -14,8 +14,14 @@ namespace Tiantui_Stars_Blade
 
         public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
 
+        public override void Notify_Starting()
+        {
+            base.Notify_Starting();
+            MeleeAnimationCompat.RefreshHeldWeapon(pawn);
+        }
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            AddFinishAction(condition => MeleeAnimationCompat.RefreshHeldWeapon(pawn));
             this.FailOn(() => BladeComp == null);
 
             int switchTicks = BladeComp?.Props.reloadTicks ?? 120;

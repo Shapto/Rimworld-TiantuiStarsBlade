@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<FleckDef Name="Tiantui_ExhaustPuffBase" Abstract="True">
+		<fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.02</fadeInTime>
+		<solidTime>0.08</solidTime>
+		<fadeOutTime>0.3</fadeOutTime>
+		<growthRate>0.8</growthRate>
+	</FleckDef>
+
+	<FleckDef ParentName="Tiantui_ExhaustPuffBase">
+		<defName>Tiantui_ExhaustPuff_A</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaust_A</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+	<FleckDef ParentName="Tiantui_ExhaustPuffBase">
+		<defName>Tiantui_ExhaustPuff_B</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaust_B</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+	<FleckDef ParentName="Tiantui_ExhaustPuffBase">
+		<defName>Tiantui_ExhaustPuff_C</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaust_C</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+	<FleckDef ParentName="Tiantui_ExhaustPuffBase">
+		<defName>Tiantui_ExhaustPuff_D</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaust_D</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+</Defs>

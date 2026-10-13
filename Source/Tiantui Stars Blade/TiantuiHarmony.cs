@@ -35,4 +35,19 @@ namespace Tiantui_Stars_Blade
             if (___pawn.jobs?.curDriver is JobDriver_TiantuiDashStumble stumbleDriver) __result = stumbleDriver.LyingBodyAngle;
         }
     }
+
+    [HarmonyPatch(typeof(Thing), nameof(Thing.Graphic), MethodType.Getter)]
+    public static class Patch_Thing_Graphic_TiantuiOpened
+    {
+        public static void Postfix(Thing __instance, ref Graphic __result)
+        {
+            if (!(__instance.ParentHolder is Pawn_EquipmentTracker)) return;
+
+            CompTiantuiBlade bladeComp = (__instance as ThingWithComps)?.GetComp<CompTiantuiBlade>();
+            if (bladeComp == null || !bladeComp.IsOpened) return;
+
+            Graphic openedGraphic = bladeComp.OpenedGraphic;
+            if (openedGraphic != null) __result = openedGraphic;
+        }
+    }
 }

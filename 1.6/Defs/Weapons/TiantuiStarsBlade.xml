@@ -117,6 +117,9 @@
 				<overheatSound>Tiantui_Overheat</overheatSound>
 				<coolOffSound>Tiantui_CoolOff</coolOffSound>
 				<equipSound>Tiantui_Equip</equipSound>
+				<exhaustFleckScale>0.15~0.22</exhaustFleckScale>
+				<chargeFlareIntensity>1.3</chargeFlareIntensity>
+				<openedTexPath>Weapons/TiantuiStarsBladeOpened</openedTexPath>
 				<reloadSounds>
 					<li>Tiantui_Reload1</li>
 					<li>Tiantui_Reload2</li>
@@ -125,6 +128,12 @@
 					<li>Tiantui_Reload5</li>
 					<li>Tiantui_Reload6</li>
 				</reloadSounds>
+				<exhaustFlecks>
+					<li>Tiantui_ExhaustPuff_A</li>
+					<li>Tiantui_ExhaustPuff_B</li>
+					<li>Tiantui_ExhaustPuff_C</li>
+					<li>Tiantui_ExhaustPuff_D</li>
+				</exhaustFlecks>
 			</li>
 			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
 				<swingLandedSound>Tiantui_Swing</swingLandedSound>
@@ -157,5 +166,24 @@
 				</finisherOnHitEffects>
 			</li>
 		</comps>
+		<modExtensions>
+			<li Class="SingularityFramework.WeaponAnchor.ModExtension_WeaponAnchors">
+				<textureSize>(1024, 1024)</textureSize>
+				<anchorGroups>
+					<li>
+						<name>Exhausts</name>
+						<pixelDirection>(-0.75, -0.66)</pixelDirection>
+						<pixelPoints>
+							<li>(626, 244)</li>
+							<li>(580, 330)</li>
+							<li>(524, 404)</li>
+							<li>(476, 472)</li>
+							<li>(418, 538)</li>
+							<li>(362, 598)</li>
+						</pixelPoints>
+					</li>
+				</anchorGroups>
+			</li>
+		</modExtensions>
 	</ThingDef>
 </Defs>

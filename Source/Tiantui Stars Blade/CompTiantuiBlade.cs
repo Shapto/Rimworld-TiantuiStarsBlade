@@ -2,6 +2,8 @@
 using SingularityFramework.Equipment;
 using SingularityFramework.Relics;
 using SingularityFramework.Sequences;
+using SingularityFramework.Visuals;
+using SingularityFramework.WeaponAnchor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +67,23 @@ namespace Tiantui_Stars_Blade
         public FloatRange stumbleBruiseDamage = new FloatRange(2f, 4f);
         public int stumbleStunTicks = 90;
         public float stumbleDisarmChance = 0.25f;
+
+        public List<FleckDef> exhaustFlecks;
+        public FloatRange exhaustFleckScale = new FloatRange(0.25f, 0.35f);
+        public FloatRange exhaustFleckSpeed = new FloatRange(0.3f, 0.6f);
+        public float exhaustOutwardOffset = 0.1f;
+        public float exhaustAngleSpread = 12f;
+
+        public FleckDef exhaustSmokeFleck;
+        public FloatRange exhaustSmokeScale = new FloatRange(0.4f, 0.7f);
+        public FloatRange exhaustSmokeSpeed = new FloatRange(0.2f, 0.45f);
+        public float exhaustSmokeChance = 0.6f;
+
+        public List<float> chargeFlareFractions = new List<float> { 0.35f, 0.7f };
+        public float chargeFlareIntensity = 1.6f;
+        public int chargeSmokeIntervalTicks = 20;
+
+        public string openedTexPath;
 
         public CompProperties_TiantuiBlade()
         {
@@ -143,6 +162,35 @@ namespace Tiantui_Stars_Blade
             }
         }
 
+        private Graphic openedGraphic;
+
+        /// <summary>
+        /// True while the wielder is reloading or loading the other rounds, when the blade is broken open.
+        /// </summary>
+        public bool IsOpened
+        {
+            get
+            {
+                JobDef currentJob = Wielder?.CurJobDef;
+                return currentJob == TiantuiDefOf.Tiantui_ReloadBlade || currentJob == TiantuiDefOf.Tiantui_SwitchRounds;
+            }
+        }
+
+        /// <summary>
+        /// The broken-open texture, sized and shaded like the normal one. Null if no opened texture is set.
+        /// </summary>
+        public Graphic OpenedGraphic
+        {
+            get
+            {
+                if (openedGraphic != null || Props.openedTexPath.NullOrEmpty()) return openedGraphic;
+
+                Graphic closedGraphic = parent.def.graphic;
+                openedGraphic = GraphicDatabase.Get<Graphic_Single>(Props.openedTexPath, closedGraphic.Shader, closedGraphic.drawSize, closedGraphic.color);
+                return openedGraphic;
+            }
+        }
+
         /// <summary>
         /// A newly made blade comes with both magazines full.
         /// </summary>
@@ -167,6 +215,7 @@ namespace Tiantui_Stars_Blade
 
             if (addsHeat) AddHeat(IsSavageModeActive ? Props.heatPerSavageTigerslayerRound : Props.heatPerTigerslayerRound);
             PlayAtWielder(firedSound ?? Props.roundFiredSound);
+            VentExhausts();
             return true;
         }
 
@@ -316,6 +365,49 @@ namespace Tiantui_Stars_Blade
                 };
             }
         }
+
+        public void VentExhausts(float intensity = 1f, bool withFlames = true)
+        {
+            Pawn wielder = Wielder;
+            if (wielder?.Map == null) return;
+
+            WeaponAnchorGroup exhausts = WeaponEffects.AnchorGroupOf(wielder, "Exhausts", out _);
+            if (exhausts == null) return;
+
+            for (int exhaustIndex = 0; exhaustIndex < exhausts.PointCount; exhaustIndex++)
+            {
+                if (!WeaponEffects.TryGetAnchorInWorld(wielder, "Exhausts", exhaustIndex, out Vector3 worldPosition, out Vector3 worldDirection)) return;
+
+                Vector3 exhaustPosition = worldPosition + worldDirection * Props.exhaustOutwardOffset;
+                float outwardAngle = worldDirection.AngleFlat() + Rand.Range(-Props.exhaustAngleSpread, Props.exhaustAngleSpread);
+
+                if (withFlames) ThrowExhaustFlame(wielder.Map, exhaustPosition, outwardAngle, intensity);
+                if (!withFlames || Rand.Chance(Props.exhaustSmokeChance * intensity)) ThrowExhaustSmoke(wielder.Map, exhaustPosition, outwardAngle, intensity);
+            }
+        }
+
+        private void ThrowExhaustFlame(Map map, Vector3 exhaustPosition, float outwardAngle, float intensity)
+        {
+            if (Props.exhaustFlecks.NullOrEmpty()) return;
+
+            FleckCreationData flameData = FleckMaker.GetDataStatic(exhaustPosition, map, Props.exhaustFlecks.RandomElement(), Props.exhaustFleckScale.RandomInRange * intensity);
+            flameData.rotation = outwardAngle;
+            flameData.velocityAngle = outwardAngle;
+            flameData.velocitySpeed = Props.exhaustFleckSpeed.RandomInRange * intensity;
+            map.flecks.CreateFleck(flameData);
+        }
+
+        private void ThrowExhaustSmoke(Map map, Vector3 exhaustPosition, float outwardAngle, float intensity)
+        {
+            if (Props.exhaustSmokeFleck == null) return;
+
+            FleckCreationData smokeData = FleckMaker.GetDataStatic(exhaustPosition, map, Props.exhaustSmokeFleck, Props.exhaustSmokeScale.RandomInRange * intensity);
+            smokeData.rotationRate = Rand.Range(-30f, 30f);
+            smokeData.velocityAngle = Mathf.LerpAngle(outwardAngle, 0f, 0.5f) + Rand.Range(-15f, 15f);
+            smokeData.velocitySpeed = Props.exhaustSmokeSpeed.RandomInRange;
+            map.flecks.CreateFleck(smokeData);
+        }
+        
 
         public override void PostExposeData()
         {

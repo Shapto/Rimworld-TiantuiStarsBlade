@@ -41,7 +41,7 @@
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityChain">
 				<stageCount>3</stageCount>
 				<cooldownAfterFinalStageTicks>0</cooldownAfterFinalStageTicks>
-				<chargeUpJob>Sing_ChargeUp</chargeUpJob>
+				<chargeUpJob>Tiantui_ChargeUp</chargeUpJob>
 				<stageSettings>
 					<li />
 					<li />
@@ -96,7 +96,7 @@
 			<li Class="SingularityFramework.Sequences.CompProperties_AbilityChain">
 				<stageCount>6</stageCount>
 				<cooldownAfterFinalStageTicks>0</cooldownAfterFinalStageTicks>
-				<chargeUpJob>Sing_ChargeUp</chargeUpJob>
+				<chargeUpJob>Tiantui_ChargeUp</chargeUpJob>
 				<stageSettings>
 					<li>
 						<chargeUpTicks>108</chargeUpTicks>

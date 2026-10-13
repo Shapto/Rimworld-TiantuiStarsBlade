@@ -25,4 +25,10 @@
 		<casualInterruptible>false</casualInterruptible>
 		<playerInterruptible>false</playerInterruptible>
 	</JobDef>
+	<JobDef>
+		<defName>Tiantui_ChargeUp</defName>
+		<driverClass>Tiantui_Stars_Blade.JobDriver_TiantuiChargeUp</driverClass>
+		<reportString>charging up.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
 </Defs>

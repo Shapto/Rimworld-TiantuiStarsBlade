@@ -33,10 +33,31 @@
 			<shaderType>Mote</shaderType>
 		</graphicData>
 	</FleckDef>
-	<FleckDef ParentName="Tiantui_ExhaustPuffBase">
-		<defName>Tiantui_ExhaustPuff_D</defName>
+	<FleckDef Name="Tiantui_ExhaustCoreBase" ParentName="Tiantui_ExhaustPuffBase" Abstract="True">
+		<altitudeLayerIncOffset>1</altitudeLayerIncOffset>
+		<growthRate>0.45</growthRate>
+	</FleckDef>
+
+	<FleckDef ParentName="Tiantui_ExhaustCoreBase">
+		<defName>Tiantui_ExhaustCore_A</defName>
 		<graphicData>
-			<texPath>VFX/TiantuiExhaust_D</texPath>
+			<texPath>VFX/TiantuiExhaustCore_A</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+	<FleckDef ParentName="Tiantui_ExhaustCoreBase">
+		<defName>Tiantui_ExhaustCore_B</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaustCore_B</texPath>
+			<graphicClass>Graphic_Fleck</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+	</FleckDef>
+	<FleckDef ParentName="Tiantui_ExhaustCoreBase">
+		<defName>Tiantui_ExhaustCore_C</defName>
+		<graphicData>
+			<texPath>VFX/TiantuiExhaustCore_C</texPath>
 			<graphicClass>Graphic_Fleck</graphicClass>
 			<shaderType>Mote</shaderType>
 		</graphicData>

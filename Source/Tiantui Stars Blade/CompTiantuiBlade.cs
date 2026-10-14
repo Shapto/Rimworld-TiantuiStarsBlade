@@ -86,6 +86,9 @@ namespace Tiantui_Stars_Blade
         public List<ThingDef> bladetrailDefs;
         public string openedTexPath;
 
+        public List<FleckDef> exhaustCoreFlecks;
+        public float exhaustCoreScaleFactor = 0.55f;
+
         public CompProperties_TiantuiBlade()
         {
             compClass = typeof(CompTiantuiBlade);
@@ -391,11 +394,22 @@ namespace Tiantui_Stars_Blade
         {
             if (Props.exhaustFlecks.NullOrEmpty()) return;
 
-            FleckCreationData flameData = FleckMaker.GetDataStatic(exhaustPosition, map, Props.exhaustFlecks.RandomElement(), Props.exhaustFleckScale.RandomInRange * intensity);
+            float flameScale = Props.exhaustFleckScale.RandomInRange * intensity;
+            float flameSpeed = Props.exhaustFleckSpeed.RandomInRange * intensity;
+
+            FleckCreationData flameData = FleckMaker.GetDataStatic(exhaustPosition, map, Props.exhaustFlecks.RandomElement(), flameScale);
             flameData.rotation = outwardAngle;
             flameData.velocityAngle = outwardAngle;
-            flameData.velocitySpeed = Props.exhaustFleckSpeed.RandomInRange * intensity;
+            flameData.velocitySpeed = flameSpeed;
             map.flecks.CreateFleck(flameData);
+
+            if (Props.exhaustCoreFlecks.NullOrEmpty()) return;
+
+            FleckCreationData coreData = FleckMaker.GetDataStatic(exhaustPosition, map, Props.exhaustCoreFlecks.RandomElement(), flameScale * Props.exhaustCoreScaleFactor);
+            coreData.rotation = outwardAngle;
+            coreData.velocityAngle = outwardAngle;
+            coreData.velocitySpeed = flameSpeed;
+            map.flecks.CreateFleck(coreData);
         }
 
         private void ThrowExhaustSmoke(Map map, Vector3 exhaustPosition, float outwardAngle, float intensity)

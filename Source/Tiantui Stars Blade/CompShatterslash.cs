@@ -1,4 +1,5 @@
 ﻿using SingularityFramework.Strikes;
+using SingularityFramework.Visuals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,7 @@ namespace Tiantui_Stars_Blade
             if (Props.swingLandedSound != null && attacker.Map != null) Props.swingLandedSound.PlayOneShot(new TargetInfo(attacker.Position, attacker.Map));
             if (firingThisSwing && BladeComp.TrySpendRound())
             {
+                Bladetrails.SpawnSwing(attacker, target.DrawPos, BladeComp.Props.bladetrailDefs);
                 OnHitEffect.TryApplyAll(savageThisSwing ? Props.savageTigerslayerOnHitEffects : Props.tigerslayerOnHitEffects, attacker, target);
                 if (isFinisherThisSwing) OnHitEffect.TryApplyAll(Props.finisherOnHitEffects, attacker, target);
             }

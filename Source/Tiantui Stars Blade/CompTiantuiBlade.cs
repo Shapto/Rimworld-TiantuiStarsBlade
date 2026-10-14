@@ -83,6 +83,7 @@ namespace Tiantui_Stars_Blade
         public float chargeFlareIntensity = 1.6f;
         public int chargeSmokeIntervalTicks = 20;
 
+        public List<ThingDef> bladetrailDefs;
         public string openedTexPath;
 
         public CompProperties_TiantuiBlade()
@@ -407,7 +408,13 @@ namespace Tiantui_Stars_Blade
             smokeData.velocitySpeed = Props.exhaustSmokeSpeed.RandomInRange;
             map.flecks.CreateFleck(smokeData);
         }
-        
+
+        public void SpawnMotionTrail()
+        {
+            Pawn wielder = Wielder;
+            if (wielder != null) Bladetrails.SpawnAtWeapon(wielder, Props.bladetrailDefs);
+        }
+
 
         public override void PostExposeData()
         {

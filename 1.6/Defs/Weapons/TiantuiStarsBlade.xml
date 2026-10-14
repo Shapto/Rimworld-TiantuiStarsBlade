@@ -134,6 +134,13 @@
 					<li>Tiantui_ExhaustPuff_C</li>
 					<li>Tiantui_ExhaustPuff_D</li>
 				</exhaustFlecks>
+				<bladetrailDefs>
+					<li>Tiantui_BladetrailA</li>
+					<li>Tiantui_BladetrailB</li>
+					<li>Tiantui_BladetrailC</li>
+					<li>Tiantui_BladetrailD</li>
+					<li>Tiantui_BladetrailE</li>
+				</bladetrailDefs>
 			</li>
 			<li Class="Tiantui_Stars_Blade.CompProperties_Shatterslash">
 				<swingLandedSound>Tiantui_Swing</swingLandedSound>

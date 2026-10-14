@@ -33,11 +33,16 @@ namespace Tiantui_Stars_Blade
         {
             base.Notify_Starting();
             MeleeAnimationCompat.RefreshHeldWeapon(pawn);
+            BladeComp?.SpawnMotionTrail();
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            AddFinishAction(condition => MeleeAnimationCompat.RefreshHeldWeapon(pawn));
+            AddFinishAction(condition =>
+            {
+                MeleeAnimationCompat.RefreshHeldWeapon(pawn);
+                BladeComp?.SpawnMotionTrail();
+            });
             this.FailOn(() => BladeComp == null);
             int reloadTicks = BladeComp?.Props.reloadTicks ?? 120;
             List<SoundDef> reloadSounds = BladeComp?.Props.reloadSounds;

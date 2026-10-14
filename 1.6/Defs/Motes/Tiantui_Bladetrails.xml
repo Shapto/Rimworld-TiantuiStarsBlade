@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="Tiantui_BladetrailBase" Abstract="True">
+		<thingClass>SingularityFramework.Visuals.Mote_Bladetrail</thingClass>
+		<category>Mote</category>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<useHitPoints>false</useHitPoints>
+		<mote>
+			<fadeInTime>0.03</fadeInTime>
+			<solidTime>0.1</solidTime>
+			<fadeOutTime>0.25</fadeOutTime>
+		</mote>
+		<modExtensions>
+			<li Class="SingularityFramework.Visuals.ModExtension_Bladetrail">
+				<sweepDegrees>70</sweepDegrees>
+				<scaleJitterRange>0.9~1.1</scaleJitterRange>
+				<angleSpread>20</angleSpread>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="Tiantui_BladetrailBase">
+		<defName>Tiantui_BladetrailA</defName>
+		<label>bladetrail</label>
+		<graphicData>
+			<texPath>VFX/bladetrail_A</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(2, 2)</drawSize>
+			<color>(0.4, 0.02, 0.08, 0.95)</color>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="Tiantui_BladetrailBase">
+		<defName>Tiantui_BladetrailB</defName>
+		<label>bladetrail</label>
+		<graphicData>
+			<texPath>VFX/bladetrail_B</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(2, 2)</drawSize>
+			<color>(0.4, 0.02, 0.08, 0.95)</color>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="Tiantui_BladetrailBase">
+		<defName>Tiantui_BladetrailC</defName>
+		<label>bladetrail</label>
+		<graphicData>
+			<texPath>VFX/bladetrail_C</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(2, 2)</drawSize>
+			<color>(0.4, 0.02, 0.08, 0.95)</color>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="Tiantui_BladetrailBase">
+		<defName>Tiantui_BladetrailD</defName>
+		<label>bladetrail</label>
+		<graphicData>
+			<texPath>VFX/bladetrail_D</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(2, 2)</drawSize>
+			<color>(0.4, 0.02, 0.08, 0.95)</color>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="Tiantui_BladetrailBase">
+		<defName>Tiantui_BladetrailE</defName>
+		<label>bladetrail</label>
+		<graphicData>
+			<texPath>VFX/bladetrail_E</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(2, 2)</drawSize>
+			<color>(0.4, 0.02, 0.08, 0.95)</color>
+		</graphicData>
+	</ThingDef>
+</Defs>

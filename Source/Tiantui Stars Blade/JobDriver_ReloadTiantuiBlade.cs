@@ -29,17 +29,31 @@ namespace Tiantui_Stars_Blade
             return pawn.Reserve(AmmoStack, job, 1, -1, null, errorOnFailed);
         }
 
-        public override void Notify_Starting()
+        private bool isLoading;
+
+        /// <summary>
+        /// True once the pawn has the ammo in reach and is loading it, the part where the blade is broken open.
+        /// </summary>
+        public bool IsLoading => isLoading;
+
+        private void StartLoading()
         {
-            base.Notify_Starting();
+            isLoading = true;
             MeleeAnimationCompat.RefreshHeldWeapon(pawn);
             BladeComp?.SpawnMotionTrail();
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref isLoading, "isLoading");
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
             AddFinishAction(condition =>
             {
+                if (!isLoading) return;
                 MeleeAnimationCompat.RefreshHeldWeapon(pawn);
                 BladeComp?.SpawnMotionTrail();
             });
@@ -49,13 +63,17 @@ namespace Tiantui_Stars_Blade
             if (AmmoIsCarried)
             {
                 this.FailOn(() => AmmoStack == null || AmmoStack.Destroyed);
-                yield return Toils_General.Wait(reloadTicks).WithSoundsSpreadOver(reloadSounds, reloadTicks);
+                Toil loadToil = Toils_General.Wait(reloadTicks).WithSoundsSpreadOver(reloadSounds, reloadTicks);
+                loadToil.AddPreInitAction(StartLoading);
+                yield return loadToil;
             }
             else
             {
                 this.FailOnDespawnedNullOrForbidden(AmmoStackIndex);
                 yield return Toils_Goto.GotoThing(AmmoStackIndex, PathEndMode.Touch);
-                yield return Toils_General.Wait(reloadTicks, AmmoStackIndex).WithProgressBarToilDelay(AmmoStackIndex).WithSoundsSpreadOver(reloadSounds, reloadTicks);
+                Toil loadToil = Toils_General.Wait(reloadTicks, AmmoStackIndex).WithProgressBarToilDelay(AmmoStackIndex).WithSoundsSpreadOver(reloadSounds, reloadTicks);
+                loadToil.AddPreInitAction(StartLoading);
+                yield return loadToil;
             }
 
             Toil loadRounds = ToilMaker.MakeToil("LoadRounds");

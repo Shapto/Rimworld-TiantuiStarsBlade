@@ -172,8 +172,8 @@ namespace Tiantui_Stars_Blade
         {
             get
             {
-                JobDef currentJob = Wielder?.CurJobDef;
-                return currentJob == TiantuiDefOf.Tiantui_ReloadBlade || currentJob == TiantuiDefOf.Tiantui_SwitchRounds;
+                JobDriver currentDriver = Wielder?.jobs?.curDriver;
+                return currentDriver is JobDriver_SwitchTiantuiRounds || (currentDriver is JobDriver_ReloadTiantuiBlade reloadDriver && reloadDriver.IsLoading);
             }
         }
 

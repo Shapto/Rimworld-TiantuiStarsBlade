@@ -145,10 +145,6 @@ namespace Tiantui_Stars_Blade
                 FleckMaker.ThrowDustPuff(nextCell, pawn.Map, 1.2f);
             }
 
-            float quarterTurnsPerCell = BladeProps?.stumbleQuarterTurnsPerCell ?? 2f;
-            int quarterTurns = Mathf.FloorToInt(rollProgress * cellsToRoll.Count * quarterTurnsPerCell);
-            pawn.Rotation = new Rot4((startRotationIndex + quarterTurns) % 4);
-
             if (ticksRolling >= RollTicks) ReadyForNextToil();
         }
 
